@@ -47,29 +47,15 @@ model HotelServiceBookings {
 }
 
 model HotelGuest {
-  id                   Int                    @id @default(autoincrement())
-  room_number          Int
+  id                   Int                     @id @default(autoincrement())
+  room_number          Int                     
   checkin_date         DateTime
   checkout_date        DateTime
-  email                String                 @unique
+  email                String                  
   fullname             String
+  login_token          String?                 // Token used for passwordless login
+  token_expires_at     DateTime?               // Expiry time for login token
   HotelServiceBookings HotelServiceBookings[]
-}
 
-model Attraction {
-  id             Int    @id @default(autoincrement())
-  title          String
-  address        String
-  description    String
-  link_url       String
-  latitude       Float
-  longitude      Float
-  indoor_outdoor String
-  tags           Tag[]
-}
-
-model Tag {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  Attraction Attraction[]
+  @@unique([room_number, checkin_date])
 }
