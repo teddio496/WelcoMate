@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@prisma/client": "^5.21.1",
     "@prisma/studio": "^0.503.0",
     "csv-parser": "^3.0.0",
