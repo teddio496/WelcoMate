@@ -45,7 +45,7 @@ model HotelServiceBooking {
 }
 
 model HotelGuest {
-  id              Int                   @id @default(autoincrement())
+  id              Int     @id @default(autoincrement())
   hotelId         Int
   roomNumber      Int
   checkinDate     DateTime
@@ -55,7 +55,9 @@ model HotelGuest {
   loginToken      String? // Token used for passwordless login
   tokenExpiresAt  DateTime? // Expiry time for login token
   serviceBookings HotelServiceBooking[]
-  hotel           Hotel                 @relation(fields: [hotelId], references: [id])
+  hotel           Hotel    @relation(fields: [hotelId], references: [id])
+  plan            Plan     @relation(fields: [planId], references:[id])
+  planId          Int      @unique
 
   @@unique([roomNumber, checkinDate])
   @@index([hotelId])
@@ -77,4 +79,9 @@ model Tag {
   id         Int          @id @default(autoincrement())
   name       String       @unique
   Attraction Attraction[]
+}
+
+model Plan {
+  id         Int         @id @default(autoincrement())
+  plan       String
 }
