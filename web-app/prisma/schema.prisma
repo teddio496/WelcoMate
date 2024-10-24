@@ -13,35 +13,34 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-
 model Hotels {
-  hotel_id    Int     @id @default(autoincrement())
-  hotel_name  String
-  city        String
-  HotelServices HotelServices[]
+  hotel_id             Int                    @id @default(autoincrement())
+  hotel_name           String
+  city                 String
+  HotelServices        HotelServices[]
   HotelServiceBookings HotelServiceBookings[]
 }
 
 model HotelServices {
-  id            Int     @id @default(autoincrement())
-  hotel_id      Int
-  service_name  String
-  descriptions  String?
-  image_links   String?
-  free_service  Boolean
-  free_premium  Boolean // free services for "premium" user
-  hotel         Hotels  @relation(fields: [hotel_id], references: [hotel_id])
+  id           Int     @id @default(autoincrement())
+  hotel_id     Int
+  service_name String
+  descriptions String?
+  image_links  String?
+  free_service Boolean
+  free_premium Boolean // free services for "premium" user
+  hotel        Hotels  @relation(fields: [hotel_id], references: [hotel_id])
 
   @@index([hotel_id])
 }
 
 model HotelServiceBookings {
-  id            Int     @id @default(autoincrement())
-  hotel_id      Int
-  service_name  String
-  guest_id      Int
-  hotel         Hotels  @relation(fields: [hotel_id], references: [hotel_id])
-  guest         HotelGuest @relation(fields: [guest_id], references: [id])
+  id           Int        @id @default(autoincrement())
+  hotel_id     Int
+  service_name String
+  guest_id     Int
+  hotel        Hotels     @relation(fields: [hotel_id], references: [hotel_id])
+  guest        HotelGuest @relation(fields: [guest_id], references: [id])
 
   @@index([hotel_id])
   @@index([guest_id])
