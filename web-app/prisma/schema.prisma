@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,67 +10,53 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model Hotels {
-  hotel_id             Int                    @id @default(autoincrement())
-  hotel_name           String
-  city                 String
-  HotelServices        HotelServices[]
-  HotelServiceBookings HotelServiceBookings[]
+model Hotel {
+  id              Int                   @id @default(autoincrement())
+  name            String
+  city            String
+  services        HotelService[]
+  serviceBookings HotelServiceBooking[]
+  guests          HotelGuest[]
 }
 
-model HotelServices {
+model HotelService {
   id           Int     @id @default(autoincrement())
-  hotel_id     Int
-  service_name String
+  hotelId      Int
+  name         String
   descriptions String?
-  image_links  String?
-  free_service Boolean
-  free_premium Boolean // free services for "premium" user
-  hotel        Hotels  @relation(fields: [hotel_id], references: [hotel_id])
+  imageLinks   String?
+  freeService  Boolean
+  freePremium  Boolean // Free services for premium users
+  hotel        Hotel   @relation(fields: [hotelId], references: [id])
 
-  @@index([hotel_id])
+  @@index([hotelId])
 }
 
-model HotelServiceBookings {
-  id           Int        @id @default(autoincrement())
-  hotel_id     Int
-  service_name String
-  guest_id     Int
-  hotel        Hotels     @relation(fields: [hotel_id], references: [hotel_id])
-  guest        HotelGuest @relation(fields: [guest_id], references: [id])
+model HotelServiceBooking {
+  id          Int        @id @default(autoincrement())
+  hotelId     Int
+  serviceName String
+  guestId     Int
+  hotel       Hotel      @relation(fields: [hotelId], references: [id])
+  guest       HotelGuest @relation(fields: [guestId], references: [id])
 
-  @@index([hotel_id])
-  @@index([guest_id])
+  @@index([hotelId])
+  @@index([guestId])
 }
 
 model HotelGuest {
-  id                   Int                    @id @default(autoincrement())
-  room_number          Int
-  checkin_date         DateTime
-  checkout_date        DateTime
-  email                String
-  fullname             String
-  login_token          String? // Token used for passwordless login
-  token_expires_at     DateTime? // Expiry time for login token
-  HotelServiceBookings HotelServiceBookings[]
+  id              Int                   @id @default(autoincrement())
+  hotelId         Int
+  roomNumber      Int
+  checkinDate     DateTime
+  checkoutDate    DateTime
+  email           String
+  fullname        String
+  loginToken      String? // Token used for passwordless login
+  tokenExpiresAt  DateTime? // Expiry time for login token
+  serviceBookings HotelServiceBooking[]
+  hotel           Hotel                 @relation(fields: [hotelId], references: [id])
 
-  @@unique([room_number, checkin_date])
-}
-
-model Attraction {
-  id             Int    @id @default(autoincrement())
-  title          String
-  address        String
-  description    String
-  link_url       String
-  latitude       Float
-  longitude      Float
-  indoor_outdoor String
-  tags           Tag[]
-}
-
-model Tag {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  Attraction Attraction[]
+  @@unique([roomNumber, checkinDate])
+  @@index([hotelId])
 }
