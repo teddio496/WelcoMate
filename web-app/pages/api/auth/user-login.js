@@ -1,16 +1,20 @@
 import { prisma } from '@/utils/prismaClient';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+  console.log(req.query);
   const { token } = req.body;
 
   const guest = await prisma.hotelGuest.findFirst({
     where: {
-      login_token: token,
-      token_expires_at: { gte: new Date() }, 
+      loginToken: token,
+      tokenExpiresAt: { gte: new Date() }, 
     },
   });
 
@@ -38,7 +42,7 @@ export default async function handler(req, res) {
       login_token: null, 
     },
   });
-  */
+  
 
   return res.status(200).json({
     accessToken,
@@ -46,7 +50,20 @@ export default async function handler(req, res) {
     guest: {
       id: guest.id,
       fullname: guest.fullname,
-      room_number: guest.roomNumber,
+      roomNumber: guest.roomNumber,
     },
   });
+  */
+
+
+  res.setHeader('Set-Cookie', [
+    `accessToken=${accessToken}; HttpOnly; Path=/; Max-Age=900`, // 15 minutes
+    `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=${14 * 24 * 60 * 60}` // 14 days
+  ]);
+
+
+  res.writeHead(302, {
+    Location: `/dashboard`,
+  });
+  res.end();
 }

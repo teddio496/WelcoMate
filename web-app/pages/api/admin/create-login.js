@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           tokenExpiresAt: tokenExpiresAt,
         },
       });
-      const loginUrl = `localhost:3000/auth/user-login?token=${token}`;
+      const loginUrl = `localhost:3000/api/auth/user-login?token=${token}`;
 
       console.log("I am about to send the email out")
       await sendEmail(email, 'Login to your account', loginUrl);
