@@ -1,5 +1,5 @@
-import { prisma } from '../../lib/prisma';
-import jwt from 'jsonwebtoken';
+import { prisma } from '@/utils/prismaClient';
+import * as jwt from 'jsonwebtoken';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
