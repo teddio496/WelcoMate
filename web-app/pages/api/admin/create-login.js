@@ -4,25 +4,18 @@ import sendEmail from '@/utils/sendEmail';
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { email, checkin_date, room_number } = req.body;
+    const { email, checkinDate, roomNumber } = req.body;
+    console.log(email);
 
-    console.log(req.body);
-    console.log(req.body['email']);
-    console.log(req.body['room_number']);
-
-    try {
-      // await sendEmail("teddio496@gmail.com", "This is the second teest", "google.com")
-      
+    try {      
       const guest = await prisma.hotelGuest.findFirst({
         where: {
-          room_number,
-          checkin_date,
+          roomNumber,
+          checkinDate: checkinDate.DateTime,
         },
       });
 
-      if (!guest) {
-        return res.status(404).json({ message: 'Guest not found' });
-      }
+      if (!guest) { return res.status(404).json({ message: 'Guest not found' }); }
 
       const token = uuidv4();
       const tokenExpiresAt = new Date(Date.now() + 60 * 60 * 12000);
@@ -34,12 +27,12 @@ export default async function handler(req, res) {
           tokenExpiresAt: tokenExpiresAt,
         },
       });
-      const loginUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/user-login?token=${token}`;
+      const loginUrl = `localhost:3000/auth/user-login?token=${token}`;
 
       console.log("I am about to send the email out")
       await sendEmail(email, 'Login to your account', loginUrl);
 
-      res.status(200).json({ message: 'Login link sent to your email' });
+      res.status(200).json({ message: 'Login link sent to your email' , link: loginUrl});
     }
     catch (e) {
       console.log(e);
