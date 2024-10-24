@@ -64,4 +64,12 @@ model Attraction {
   link_url    String
   latitude    Float
   longitude   Float
+  indoor_outdoor Int
+  tags        Tag[]
+}
+
+model Tag {
+  id          Int    @id @default(autoincrement())
+  name        String
+  Attraction Attraction[]
 }
