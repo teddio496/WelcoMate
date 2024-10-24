@@ -31,21 +31,22 @@ export default async function handler(req, res) {
     { expiresIn: '14d' }
   );
 
-
+  /*
   await prisma.hotelGuest.update({
     where: { id: guest.id },
     data: {
       login_token: null, 
     },
   });
+  */
 
-  res.status(200).json({
+  return res.status(200).json({
     accessToken,
     refreshToken,
     guest: {
       id: guest.id,
       fullname: guest.fullname,
-      room_number: guest.room_number,
+      room_number: guest.roomNumber,
     },
   });
 }
