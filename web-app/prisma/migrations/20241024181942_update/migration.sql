@@ -34,7 +34,9 @@ CREATE TABLE "HotelGuest" (
     "checkin_date" DATETIME NOT NULL,
     "checkout_date" DATETIME NOT NULL,
     "email" TEXT NOT NULL,
-    "fullname" TEXT NOT NULL
+    "fullname" TEXT NOT NULL,
+    "login_token" TEXT,
+    "token_expires_at" DATETIME
 );
 
 -- CreateTable
@@ -45,7 +47,22 @@ CREATE TABLE "Attraction" (
     "description" TEXT NOT NULL,
     "link_url" TEXT NOT NULL,
     "latitude" REAL NOT NULL,
-    "longitude" REAL NOT NULL
+    "longitude" REAL NOT NULL,
+    "indoor_outdoor" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Tag" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_AttractionToTag" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
+    CONSTRAINT "_AttractionToTag_A_fkey" FOREIGN KEY ("A") REFERENCES "Attraction" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_AttractionToTag_B_fkey" FOREIGN KEY ("B") REFERENCES "Tag" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -58,4 +75,13 @@ CREATE INDEX "HotelServiceBookings_hotel_id_idx" ON "HotelServiceBookings"("hote
 CREATE INDEX "HotelServiceBookings_guest_id_idx" ON "HotelServiceBookings"("guest_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "HotelGuest_email_key" ON "HotelGuest"("email");
+CREATE UNIQUE INDEX "HotelGuest_room_number_checkin_date_key" ON "HotelGuest"("room_number", "checkin_date");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_AttractionToTag_AB_unique" ON "_AttractionToTag"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_AttractionToTag_B_index" ON "_AttractionToTag"("B");
