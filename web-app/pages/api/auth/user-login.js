@@ -14,9 +14,7 @@ export default async function handler(req, res) {
     },
   });
 
-  if (!guest) {
-    return res.status(400).json({ message: 'Invalid or expired token' });
-  }
+  if (!guest) { return res.status(400).json({ message: 'Invalid or expired token' }); }
 
   const accessToken = jwt.sign(
     { 
