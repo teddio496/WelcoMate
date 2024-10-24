@@ -48,11 +48,15 @@ model HotelServiceBookings {
 }
 
 model HotelGuest {
-  id                Int     @id @default(autoincrement())
-  room_number       Int
-  checkin_date      DateTime
-  checkout_date     DateTime
-  email             String  @unique
-  fullname          String
+  id                   Int                     @id @default(autoincrement())
+  room_number          Int                     
+  checkin_date         DateTime
+  checkout_date        DateTime
+  email                String                  
+  fullname             String
+  login_token          String?                 // Token used for passwordless login
+  token_expires_at     DateTime?               // Expiry time for login token
   HotelServiceBookings HotelServiceBookings[]
+
+  @@unique([room_number, checkin_date])
 }
