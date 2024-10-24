@@ -57,19 +57,19 @@ model HotelGuest {
 }
 
 model Attraction {
-  id          Int    @id @default(autoincrement())
-  title       String
-  address     String
-  description String
-  link_url    String
-  latitude    Float
-  longitude   Float
-  indoor_outdoor Int
-  tags        Tag[]
+  id             Int    @id @default(autoincrement())
+  title          String
+  address        String
+  description    String
+  link_url       String
+  latitude       Float
+  longitude      Float
+  indoor_outdoor String
+  tags           Tag[]
 }
 
 model Tag {
-  id          Int    @id @default(autoincrement())
-  name        String
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
   Attraction Attraction[]
 }
