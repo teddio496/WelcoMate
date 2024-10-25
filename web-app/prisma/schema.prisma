@@ -55,7 +55,7 @@ model HotelGuest {
   tokenExpiresAt  DateTime? // Expiry time for login token
   serviceBookings HotelServiceBooking[]
   hotel           Hotel                 @relation(fields: [hotelId], references: [id])
-  Plan            Plan[]
+  plansList       Plan[]
 
   @@unique([roomNumber, checkinDate])
   @@index([hotelId])
@@ -83,6 +83,6 @@ model Tag {
 model Plan {
   id   Int    @id @default(autoincrement())
   plan String
-
-  guestId HotelGuest @relation(fields: [id], references: [id])
+  hotelGuestId Int
+  HotelGuest   HotelGuest @relation(fields: [hotelGuestId], references: [id])
 }

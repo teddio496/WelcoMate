@@ -37,9 +37,7 @@ CREATE TABLE "HotelGuest" (
     "fullname" TEXT NOT NULL,
     "loginToken" TEXT,
     "tokenExpiresAt" DATETIME,
-    "planId" INTEGER NOT NULL,
-    CONSTRAINT "HotelGuest_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "HotelGuest_planId_fkey" FOREIGN KEY ("planId") REFERENCES "Plan" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "HotelGuest_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -64,7 +62,9 @@ CREATE TABLE "Tag" (
 -- CreateTable
 CREATE TABLE "Plan" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "plan" TEXT NOT NULL
+    "plan" TEXT NOT NULL,
+    "hotelGuestId" INTEGER NOT NULL,
+    CONSTRAINT "Plan_hotelGuestId_fkey" FOREIGN KEY ("hotelGuestId") REFERENCES "HotelGuest" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable

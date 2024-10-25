@@ -4,21 +4,21 @@ import tags from '../../../data/attractions/tags.json';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-// Hugging Face Inference API URL and API key
-const HUGGING_FACE_API_URL = 'https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2';
-const HUGGING_FACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
+// HuggingFace Inference
+const apiUrl = 'https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2';
+const apiKey = process.env.HUGGINGFACE_KEY;
 
 // Function to fetch embeddings from Hugging Face Inference API
 const getSimilarities = async (text) => {
     try {
         const response = await axios.post(
-            HUGGING_FACE_API_URL,
+            apiUrl,
             { 
                 source_sentence: text,
                 sentences: tags
             }, 
             {
-                headers: { Authorization: `Bearer ${HUGGING_FACE_API_KEY}` },
+                headers: { Authorization: `Bearer ${apiKey}` },
             }
         );
         return response.data;
@@ -36,8 +36,6 @@ const recommendAttractions = async (userInput) => {
     console.log(inputText);
 
     const similarities = await getSimilarities(inputText);
-
-    console.log(similarities);
 
     const tagSimilarities = tags.map((tag, index) => ({
         tag,
@@ -69,8 +67,6 @@ async function getAttractions(tags) {
             },
         },
     });
-
-    console.log(attractions.length);
 
     return attractions;
 

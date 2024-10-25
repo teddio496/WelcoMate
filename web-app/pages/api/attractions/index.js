@@ -2,6 +2,9 @@ import fetchWeatherData from './getWeatherData.js'
 import recommendAttractions from './filterAttractions.js'
 import generateLLMResponse from './generateLLMResponse.js'
 
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 export default async function handler(req, res) {
 
     if (req.method === 'POST') {
@@ -32,6 +35,33 @@ export default async function handler(req, res) {
 
         return res.status(200).json(plan);
     } 
+
+    else if (req.method === 'GET') {
+
+        const { planId } = req.query;
+
+        if (!planId) {
+            return res.status(400).json({ error: 'Missing planId' });
+        }
+
+        try {
+            const planObj = await prisma.plan.findUnique({
+                where: { id: parseInt(planId) },
+            });
+
+            if (!planObj) {
+                return res.status(404).json({ error: 'Plan not found' });
+            }
+
+            const plan = JSON.parse(planObj.plan);
+        
+            return res.status(200).json(plan);
+        } 
+        catch (error) {
+            return res.status(500).json({ error: 'Internal server error' });
+        } 
+
+    }
 
     else {
         return res.status(405).json({ error: 'Method not allowed' });
