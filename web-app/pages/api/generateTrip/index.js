@@ -12,6 +12,7 @@ export default async function handler(req, res) {
         const { date_range, who_is_travelling, purpose_of_trip, interests, preferences, food_preferences, other_info } = req.body;
 
         if (!date_range || !date_range.start || !date_range.end || !who_is_travelling || !purpose_of_trip || !interests || !preferences || !food_preferences) {
+            console.log(req.body);
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -29,15 +30,38 @@ export default async function handler(req, res) {
         console.log(user_input);
 
         const weather_data = await fetchWeatherData(user_input.date_range.start, user_input.date_range.end, 'Toronto');
+
         const [attractions_data, restaurants_data] = await Promise.all([
             recommend(user_input, 'attractions'),
             recommend(user_input, 'restaurants')
         ]);
         
         const response = await generateLLMResponse(attractions_data, restaurants_data, weather_data, user_input, 'Toronto');
-        console.log(response);        
+        console.log(response);    
+        
+        const firstBrace = response.indexOf('{');
+        const lastBrace = response.lastIndexOf('}');
+        let parsedResponse = {};
 
-        return res.status(200).json(JSON.parse(response));
+        if (firstBrace !== -1 && lastBrace !== -1) {
+            const jsonString = response.substring(firstBrace, lastBrace + 1);
+            parsedResponse = JSON.parse(jsonString);
+        }
+
+        try {
+            await prisma.plan.create({
+                data: {
+                    plan: JSON.stringify(parsedResponse),
+                    hotelGuestId: 1,
+                },
+            });
+            console.log('Plan saved successfully');
+        } 
+        catch (error) {
+            return res.status(500).json({ error: 'Failed to save plan' });
+        }
+
+        return res.status(200).json(response);
     } 
 
     else if (req.method === 'GET') {
