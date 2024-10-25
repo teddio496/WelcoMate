@@ -10,7 +10,7 @@ export default async function generateResponse(attractions_data, weather_data, u
         For each date in the json "+JSON.stringify(weather_data)+", select three attractions from attractions_data (without replacement) and assign them to the morning, afternoon, and night keys. \
         If the weather condition for that date is not ideal, only select attractions that are indoor. If it is sunny, select outdoor attractions. Otherwise, balance them. For each attraction, \
         include only the following keys: title, address, description, link_url, and indoor_outdoor. Tailor each description based on the context of the following prompts: \
-        "+purpose_of_trip+", "+interests+", "+preferences+", "+other_info+". The format of the JSON must follow this structure: { 'day_1': { 'morning': { 'title': '...', 'address': '...', \
+        "+user_info.purpose_of_trip+", "+user_info.interests+", "+user_info.preferences+", "+user_info.other_info+". The format of the JSON must follow this structure: { 'day_1': { 'morning': { 'title': '...', 'address': '...', \
         'description': '...', 'link_url': '...'}, 'afternoon': { 'title': '...', 'address': '...', 'description': '...', 'link_url': '...'}, \
         'night': { 'title': '...', 'address': '...', 'description': '...', 'link_url': '...'} }, 'day_N': { repeat the structure for other days } }";
 
