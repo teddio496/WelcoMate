@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
 
-const Dashboard = () => {
+export const Dashboard = () => {
     const [roomNumber, setRoomNumber] = useState('');
     const [checkinDate, setCheckinDate] = useState('');
-    console.log('Dashboard component rendered');
-    const accessTokenCookie = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
-    console.log(accessTokenCookie)
-    if (accessTokenCookie) {
-        const token = accessTokenCookie.split('=')[1]; 
-        
-        try {
-            const decodedToken = jwt.verify(token);
-            setRoomNumber(decodedToken.roomNumber);
-            setCheckinDate(decodedToken.checkinDate);
-        } catch (error) {
-            console.error('Error decoding token:', error);
+
+    useEffect(() => {
+        console.log('Dashboard component rendered');
+        const title = document.title;
+        console.log("Document Title: ", title);
+
+        const accessTokenCookie = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
+        console.log("HERE IS THE COOKIE: " + document.cookie);
+
+        if (accessTokenCookie) {
+            const token = accessTokenCookie.split('=')[1];
+            try {
+                const decodedToken = jwt.decode(token);  // jwt.decode instead of jwt.verify unless you have the secret
+                setRoomNumber(decodedToken.roomNumber);
+                setCheckinDate(decodedToken.checkinDate);
+            } catch (error) {
+                console.error('Error decoding token:', error);
+            }
+        } else {
+            console.log('Access token not found in cookies');
         }
-    } else {
-        console.log('Access token not found in cookies');
-    }
+    }, []);  // Empty dependency array ensures this runs once after the initial render
+
     return (
         <div>
             <h1>Dashboard</h1>
@@ -28,5 +35,3 @@ const Dashboard = () => {
         </div>
     );
 };
-
-export default Dashboard;
