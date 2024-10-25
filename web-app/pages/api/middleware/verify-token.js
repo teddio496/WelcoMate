@@ -5,13 +5,13 @@ export default async function verifyToken(req, res, next) {
   if (!authHeader) {
     return res.status(401).json({ message: "authorization header missing" });
   }
-  console.log("Authorization header is there");
+  // console.log("Authorization header is there");
   const token = authHeader.split(' ')[1];
-  console.log("Token: ", token);
+  // console.log("Token: ", token);
   try {
-    console.log(jwt.decode(token));
+    // console.log(jwt.decode(token));
     req.user = jwt.decode(token);
-    console.log("User: ", req.user);
+    // console.log("User: ", req.user);
     next();
   }
   catch (e) {
