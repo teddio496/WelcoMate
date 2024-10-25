@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 export const TripForm = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const [formData, setFormData] = useState({
         dateRange: '',
@@ -31,7 +34,14 @@ export const TripForm = () => {
         <form onSubmit={handleSubmit} className="trip-form">
             {/* Date Range Input */}
             <div className="form-group">
-            <label htmlFor="dateRange">Date Range</label>
+            <label htmlFor="startDate">Start Date: </label>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            </div>
+
+            {/* Date Range Input */}
+            <div className="form-group">
+            <label htmlFor="endDate">End Date: </label>
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
             </div>
 
             {/* Purpose of Trip Dropdown */}
