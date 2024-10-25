@@ -1,10 +1,10 @@
 import React from 'react';
-// import HeaderNavBar from './HeaderNavBar';
+import HeaderNavBar from './HeaderNavBar';
 
 function Layout({ children }) {
   return (
     <div>
-      {/* <HeaderNavBar /> */}
+    <HeaderNavBar />
       <main>{children}</main>
     </div>
   );

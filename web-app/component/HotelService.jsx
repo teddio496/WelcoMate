@@ -59,12 +59,9 @@ const HotelService = () => {
 
   return (
     <div>
-      <h1>Hotel Services</h1>
+      <h3 className="p-1">Booked Services</h3>
       {guestInfo ? (
         <>
-          <p>Room Number: {guestInfo.roomNumber}</p>
-          <p>Check-in Date: {guestInfo.checkinDate}</p>
-
           {
             services.length > 0 ? (
               services.map((service) => <Service key={service.id} service={service} />)

@@ -1,79 +1,31 @@
-import React, { useState } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Box } from '@mui/system';
+import React from 'react';
 
 function HeaderNavBar() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
-  };
-
-  const navItems = ['Home', 'About', 'Services', 'Contact'];
+  const navItems = ['Service', 'TripPlanner', 'Reservations', 'Account'];
 
   return (
-    <AppBar position="static" color="primary">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          MyWebsite
-        </Typography>
-        
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+    <header  style={{ backgroundColor: '#E2DCC8', padding: 12,boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' }} > 
+      <div className="flex justify-between items-center">
+        <div>        </div>
+        <div className="font-bold text-2xl text-black">
+          <a href="/" className="text-black no-underline"><d>Your Hotel</d></a>
+        </div>
+
+        <nav className="md:flex items-center gap-5">
           {navItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
-              style={{
-                textDecoration: 'none',
-                color: 'white',
-                marginRight: '20px',
-                padding: '8px 16px',
-                borderRadius: '4px',
-              }}
+              href={`/${item.toLowerCase()}`}
+              className="text-black no-underline mr-5 px-4 py-2 rounded-md inline-block hover:bg-gray-200"
             >
-              {item}
+              <d>{item}</d>
             </a>
           ))}
-        </Box>
+        </nav>
+        <div> </div>
 
-        <IconButton
-          edge="end"
-          color="inherit"
-          aria-label="menu"
-          sx={{ display: { xs: 'block', md: 'none' } }}
-          onClick={toggleDrawer(true)}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Toolbar>
-
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List sx={{ width: 250 }}>
-          {navItems.map((item) => (
-            <ListItem button key={item} onClick={toggleDrawer(false)}>
-              <ListItemText>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  style={{ textDecoration: 'none', color: 'black' }}
-                >
-                  {item}
-                </a>
-              </ListItemText>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </AppBar>
+      </div>
+    </header>
   );
 }
 

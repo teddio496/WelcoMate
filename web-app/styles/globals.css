@@ -5,20 +5,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-primary: 'Lora', serif;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Lora', serif;
+  font-weight: 700;
+}
+
+d {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+}
+
+p, li, span {
+  font-family: 'Montserrat', sans-serif;
+}
+
+strong {
+  font-weight: 600;
+}
+
+
 
 .trip-form-container {
   max-width: 600px;

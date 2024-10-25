@@ -6,7 +6,7 @@ const Service = ({ service }) => {
       <div className="flex-1">
         <h3 className="text-xl font-semibold mb-2 text-black">{service.name}</h3>
         <p className="mb-1 text-black">{service.descriptions || "No description available."}</p>
-        <p className="mb-2 text-black">{service.freeService ? "This is a free service." : "This service has a fee."}</p>
+        {/*<p className="mb-2 text-black">{service.freeService ? "This is a free service." : "This service has a fee."}</p>*/}
       </div>
       {service.imageLinks && (
         <img
