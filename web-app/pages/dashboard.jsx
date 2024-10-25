@@ -83,10 +83,10 @@ export const Dashboard = () => {
 
                     <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-40">
                         <div className="bg-white bg-opacity-40 backdrop-blur-md shadow-md rounded-lg p-8 w-11/12 sm:w-7/10 md:w-3/5">
-                            <h6 className="text-4xl font-normal whitespace-nowrap">
+                            <h6 className="text-5xl font-normal whitespace-nowrap">
                                 Welcome,  { guestInfo?.fullname || 'User' }!
                             </h6>
-                            <d className="text-xl mt-4">
+                            <d className="text-2xl mt-4">
                                 Room Number: <strong>{ roomNumber || 'Unavailable' }</strong>
                             </d>
 
@@ -94,12 +94,12 @@ export const Dashboard = () => {
 
                             <div className="flex justify-between">
                                 <div>
-                                    <d className="text-lg">Check-in:</d><br/>
-                                    <d className="text-lg text-blue-600 font-medium">{ checkinDate || 'Unavailable' }</d>
+                                    <d className="text-xl">Check-in:</d><br/>
+                                    <d className="text-xl text-blue-600 font-medium">{ checkinDate || 'Unavailable' }</d>
                                 </div>
                                 <div>
-                                    <d className="text-lg">Check-out:</d><br/>
-                                    <d className="text-lg text-red-600 font-medium">{ guestInfo?.checkoutDate?.split('T')[0] || 'Unavailable' }</d>
+                                    <d className="text-xl">Check-out:</d><br/>
+                                    <d className="text-xl text-red-600 font-medium">{ guestInfo?.checkoutDate?.split('T')[0] || 'Unavailable' }</d>
                                 </div>
                             </div>
                         </div>
@@ -109,22 +109,23 @@ export const Dashboard = () => {
 
                 {accessToken ? (
                     <div className="flex">
-                        <div className="w-1/2 ">
-                            <div className="border-white p-3 h-[700px] overflow-y-auto">
-                                <HotelService accessToken={accessToken} /> 
-                            </div>
+                        
+                        <div className="w-1/2 p-20 ">
+                        <h1 className="p-1 text-2xl">Booked Services</h1>
+                            <HotelService accessToken={accessToken} /> 
                         </div>
                         <div className="w-1/2">
-                            <div className="border-white p-3 h-[700px] overflow-y-auto">
+                            <div className="border-white p-10 h-[700px] overflow-y-auto">
                                 <ActivitiesPanel accessToken={accessToken} />
                             </div>
                         </div>
                     </div>
                 ) : (
-                    <p>Please log in to access your dashboard services.</p>
+                    <p className="text-xl">Please log in to access your dashboard services.</p>
                 )}
-                
+                <h1 className="p-1 text-2xl">Available Services</h1>
                 <ServicesView />
+
             </div>
 
             <div className="w-1/6 hidden lg:block"></div>
