@@ -60,6 +60,16 @@ const TripPlanner = () => {
                         <p className="text-black">High: {currentDay.weather.high} | Low: {currentDay.weather.low}</p>
                         <p className="text-black">Condition: {currentDay.weather.condition}</p>
                     </div>
+
+                    <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="flex-1">
+                            <h3 className="text-xl font-semibold mb-2 text-black">Breakfast</h3>
+                            <p className="mb-1 text-black">{currentDay.breakfast.title}</p>
+                            <p className="mb-1 text-black">{currentDay.breakfast.address}</p>
+                            <p className="mb-2 text-black">{currentDay.breakfast.description}</p>
+                        </div>
+                        <img src={currentDay.breakfast.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
+                    </div>
                     
                     <div className="bg-white p-4 rounded-md shadow-md flex items-center">
                         <div className="flex-1">
@@ -71,6 +81,16 @@ const TripPlanner = () => {
                         </div>
                         <img src={currentDay.morning.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                     </div>
+                    
+                    <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="flex-1">
+                            <h3 className="text-xl font-semibold mb-2 text-black">Lunch</h3>
+                            <p className="mb-1 text-black">{currentDay.lunch.title}</p>
+                            <p className="mb-1 text-black">{currentDay.lunch.address}</p>
+                            <p className="mb-2 text-black">{currentDay.lunch.description}</p>
+                        </div>
+                        <img src={currentDay.lunch.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
+                    </div>
 
                     <div className="bg-white p-4 rounded-md shadow-md flex items-center">
                         <div className="flex-1">
@@ -81,6 +101,16 @@ const TripPlanner = () => {
                             <a href={currentDay.afternoon.link_url} className="text-blue-500 hover:underline">More Info</a>
                         </div>
                         <img src={currentDay.afternoon.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
+                    </div>
+
+                    <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="flex-1">
+                            <h3 className="text-xl font-semibold mb-2 text-black">Dinner</h3>
+                            <p className="mb-1 text-black">{currentDay.dinner.title}</p>
+                            <p className="mb-1 text-black">{currentDay.dinner.address}</p>
+                            <p className="mb-2 text-black">{currentDay.dinner.description}</p>
+                        </div>
+                        <img src={currentDay.dinner.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                     </div>
 
                     <div className="bg-white p-4 rounded-md shadow-md flex items-center">
