@@ -3,7 +3,7 @@ import { prisma } from '@/utils/prismaClient';
 
 function createBooking(req, res) {
   if (req.method === "POST") {
-    const { roomNumber, checkinDate } = req.user;
+    const { roomNumber, checkinDate } = req.user; // req.user is the payload
     const { serviceName, hotelId } = req.body;
     try {
       const guest = prisma.hotelGuest.findUnique({

@@ -16,11 +16,9 @@ export const Dashboard = () => {
         if (accessTokenCookie) {
             const token = accessTokenCookie.split('=')[1];
             try {
-                const decodedToken = jwt.decode(token);  // jwt.decode instead of jwt.verify unless you have the secret
-                setRoomNumber(decodedToken.roomNumber);
-                setCheckinDate(decodedToken.checkinDate);
-            } catch (error) {
-                console.error('Error decoding token:', error);
+
+            } catch (e) {
+                console.error(e);
             }
         } else {
             console.log('Access token not found in cookies');
