@@ -1,11 +1,11 @@
 import weather from 'weather-js';
 
-export default async function fetchWeatherData(startDate, endDate) {
+export default async function fetchWeatherData(startDate, endDate, city) {
     const weatherData = [];
     const endDateObj = new Date(endDate);
 
     return new Promise((resolve, reject) => {
-        weather.find({ search: 'Toronto', degreeType: 'C' }, (err, result) => {
+        weather.find({ search: city, degreeType: 'C' }, (err, result) => {
             if (err) {
                 return reject(err);
             }
@@ -17,7 +17,6 @@ export default async function fetchWeatherData(startDate, endDate) {
                 const dateStr = currentDate.toISOString().split('T')[0];
 
                 const dayForecast = forecastData.find(forecast => forecast.date === dateStr);
-
 
                 if (dayForecast) {
                     weatherData.push({

@@ -4,7 +4,7 @@ import csv from 'csv-parser';
 
 const prisma = new PrismaClient();
 
-export default async function loadCSVData(filePath) {
+export default async function loadAttractions(filePath) {
     const attractions = [];
 
     // Read CSV and parse rows
@@ -22,6 +22,7 @@ export default async function loadCSVData(filePath) {
                 latitude: parseFloat(row.latitude),
                 longitude: parseFloat(row.longitude),
                 indoor_outdoor: row.indoor_outdoor,
+                imageLink: row.imageLink,
                 tags: tags
             });
 
@@ -40,6 +41,7 @@ export default async function loadCSVData(filePath) {
                         latitude: attraction.latitude,
                         longitude: attraction.longitude,
                         indoor_outdoor: attraction.indoor_outdoor,
+                        imageLink: attraction.imageLink,
                         tags: {
                             connectOrCreate: attraction.tags.map(tag => ({
                                 where: { name: tag.name },

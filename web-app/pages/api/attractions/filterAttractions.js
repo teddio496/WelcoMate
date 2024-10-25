@@ -30,8 +30,8 @@ const getSimilarities = async (text) => {
 
 // Recommend attractions based on user input
 const recommendAttractions = async (userInput) => {
-    const { purpose_of_trip, interests, preferences } = userInput;
-    const inputText = `${purpose_of_trip} ${interests} ${preferences}`;
+    const { who_is_travelling, purpose_of_trip, interests, preferences } = userInput;
+    const inputText = `${who_is_travelling} ${purpose_of_trip} ${interests} ${preferences}`;
 
     console.log(inputText);
 

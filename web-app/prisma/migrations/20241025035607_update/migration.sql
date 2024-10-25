@@ -13,7 +13,6 @@ CREATE TABLE "HotelService" (
     "descriptions" TEXT,
     "imageLinks" TEXT,
     "freeService" BOOLEAN NOT NULL,
-    "freePremium" BOOLEAN NOT NULL,
     CONSTRAINT "HotelService_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -38,7 +37,9 @@ CREATE TABLE "HotelGuest" (
     "fullname" TEXT NOT NULL,
     "loginToken" TEXT,
     "tokenExpiresAt" DATETIME,
-    CONSTRAINT "HotelGuest_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "planId" INTEGER NOT NULL,
+    CONSTRAINT "HotelGuest_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "HotelGuest_planId_fkey" FOREIGN KEY ("planId") REFERENCES "Plan" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -50,13 +51,20 @@ CREATE TABLE "Attraction" (
     "link_url" TEXT NOT NULL,
     "latitude" REAL NOT NULL,
     "longitude" REAL NOT NULL,
-    "indoor_outdoor" TEXT NOT NULL
+    "indoor_outdoor" TEXT NOT NULL,
+    "imageLink" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Tag" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Plan" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "plan" TEXT NOT NULL
 );
 
 -- CreateTable
