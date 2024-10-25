@@ -14,10 +14,8 @@ const getSimilarities = async (text) => {
         const response = await axios.post(
             HUGGING_FACE_API_URL,
             { 
-                
                 source_sentence: text,
                 sentences: tags
-                
             }, 
             {
                 headers: { Authorization: `Bearer ${HUGGING_FACE_API_KEY}` },
@@ -26,13 +24,11 @@ const getSimilarities = async (text) => {
         return response.data;
     } 
     catch (error) {
-        console.error('Error fetching embedding from Hugging Face API:', error);
-        console.log(error.response.data);
         throw new Error('Failed to generate embedding');
     }
 };
 
-// Helper function to recommend attractions based on user input
+// Recommend attractions based on user input
 const recommendAttractions = async (userInput) => {
     const { purpose_of_trip, interests, preferences } = userInput;
     const inputText = `${purpose_of_trip} ${interests} ${preferences}`;
@@ -61,6 +57,7 @@ const recommendAttractions = async (userInput) => {
     return topAttractions;
 };
 
+// Fetch attractions based on tags
 async function getAttractions(tags) {
 
     const attractions = await prisma.attraction.findMany({

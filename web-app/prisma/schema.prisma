@@ -26,7 +26,6 @@ model HotelService {
   descriptions String?
   imageLinks   String?
   freeService  Boolean
-  freePremium  Boolean // Free services for premium users
   hotel        Hotel   @relation(fields: [hotelId], references: [id])
 
   @@index([hotelId])
@@ -72,6 +71,7 @@ model Attraction {
   latitude       Float
   longitude      Float
   indoor_outdoor String
+  imageLink      String
   tags           Tag[]
 }
 

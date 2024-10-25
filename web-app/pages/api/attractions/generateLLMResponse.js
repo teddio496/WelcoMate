@@ -1,16 +1,28 @@
 const {GoogleGenerativeAI} = require("@google/generative-ai");
 
-export default async function handler(req,res){
-    if (req.method === 'POST'){
-        const {attractions_list ,date_range, purpose_of_trip, interests, preferences,other_info} = req.body
-        const genAI = new GoogleGenerativeAI(process.env.LLM_KEY)
+export default async function generateResponse(attractions_data, weather_data, user_input) {
+
+    try {
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY)
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = "Give a JSON response of the following and say nothing else: Given the days in the array "+date_range+", choose 3 attractions objects from "+attractions_list+" without replacement where the description is tailored based on: "+ purpose_of_trip+", "+interests+", "+preferences+", "+other_info+", and also satisfying the conditions: if the day's condition is rainy or thunderstorm, only pick attractions with the property that indoor_outdoor: Outdoor, otherwise pick any attractions. The JSON must follow the following format: {'day_1': {'morning': attraction_object1', 'afternoon': attraction_object2', 'night': attraction_object3}, ..., 'day_N': {...}}";
+        const prompt = "Give a JSON response; say nothing else. Use only information from the json "+JSON.stringify(attractions_data)+" dataset, which contains information on attractions. \
+        For each date in the json "+JSON.stringify(weather_data)+", select three attractions from attractions_data (without replacement) and assign them to the morning, afternoon, and night keys. \
+        If the weather condition for that date is not ideal, only select attractions that are indoor. If it is sunny, select outdoor attractions. Otherwise, balance them. For each attraction, \
+        include only the following keys: title, address, description, link_url, and indoor_outdoor. Tailor each description based on the context of the following prompts: \
+        "+user_input.purpose_of_trip+", "+user_input.interests+", "+user_input.preferences+", "+user_input.other_info+". \
+        The format of the JSON must follow this structure: { 'day_1': { 'weather': {'low_temp': '...', 'high_temp': '...', 'weather_condition': '...'}, \
+        'morning': { 'title': '...', 'address': '...', 'description': '...', 'link_url': '...'}, \
+        'afternoon': { 'title': '...', 'address': '...', 'description': '...', 'link_url': '...', 'low_temp': '...'}, \
+        'night': { 'title': '...', 'address': '...', 'description': '...', 'link_url': '...'} }, \
+        'day_N': { repeat the same structure for all other days } }";
 
         const result = await model.generateContent(prompt);
-        console.log(result.response.text());
-    }else{
-        return res.send(404).send({"error":"Not POST Request"})
+
+        return result.response.text();
     }
+    catch (error) {
+        throw new Error('Failed to generate response');
+    }
+
 }
