@@ -1,5 +1,6 @@
 import fetchWeatherData from './getWeatherData.js'
 import recommendAttractions from './filterAttractions.js'
+import generateLLMResponse from './generateLLMResponse.js'
 
 export default async function handler(req, res) {
 
@@ -24,14 +25,11 @@ export default async function handler(req, res) {
 
         const weather_data = await fetchWeatherData(user_input.date_range.start, user_input.date_range.end);
         const attractions_data = await recommendAttractions(user_input);
+        
+        const response = await generateLLMResponse(attractions_data, weather_data, user_input);
+        const plan = JSON.parse(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
 
-        return res.status(200).json({ weather_data, attractions_data });
-
-        // const plan = await generateLLMResponse(attractions_data, weather_data);
-
-        // Respond with the generated plan
-        // return res.status(200).json({ plan });
-
+        return res.status(200).json(plan);
     } 
 
     else {
