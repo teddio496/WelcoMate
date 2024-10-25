@@ -14,13 +14,17 @@ export const HotelService = ({ accessToken }) => {
                         Authorization: `Bearer ${accessToken}`,
                     },
                 });
+                console.log(response);
 
                 if (!response.ok) {
+                    console.log("HERE IS THE RESPONSE: " + response.status);
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                setGuestInfo(data);
+                console.log(data);
+                console.log(data.guestInfo);
+                setGuestInfo(data.guestInfo);
             } catch (error) {
                 setError("Error fetching guest info");
                 console.error("Error fetching data:", error);

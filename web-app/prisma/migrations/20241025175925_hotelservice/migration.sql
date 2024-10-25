@@ -20,10 +20,11 @@ CREATE TABLE "HotelService" (
 CREATE TABLE "HotelServiceBooking" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "hotelId" INTEGER NOT NULL,
-    "serviceName" TEXT NOT NULL,
+    "serviceId" INTEGER NOT NULL,
     "guestId" INTEGER NOT NULL,
     CONSTRAINT "HotelServiceBooking_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "HotelServiceBooking_guestId_fkey" FOREIGN KEY ("guestId") REFERENCES "HotelGuest" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "HotelServiceBooking_guestId_fkey" FOREIGN KEY ("guestId") REFERENCES "HotelGuest" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "HotelServiceBooking_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "HotelService" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -92,6 +93,9 @@ CREATE UNIQUE INDEX "HotelGuest_roomNumber_checkinDate_key" ON "HotelGuest"("roo
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Plan_hotelGuestId_key" ON "Plan"("hotelGuestId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_AttractionToTag_AB_unique" ON "_AttractionToTag"("A", "B");

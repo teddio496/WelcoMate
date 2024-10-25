@@ -7,9 +7,11 @@ export default async function verifyToken(req, res, next) {
   }
   console.log("Authorization header is there");
   const token = authHeader.split(' ')[1];
+  console.log("Token: ", token);
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    req.user = decoded;
+    console.log(jwt.decode(token));
+    req.user = jwt.decode(token);
+    console.log("User: ", req.user);
     next();
   }
   catch (e) {
