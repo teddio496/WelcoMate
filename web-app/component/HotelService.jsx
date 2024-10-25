@@ -33,7 +33,7 @@ export const HotelService = ({ accessToken }) => {
             }
         };
 
-        fetchGuestInfo();
+        if (accessToken) fetchGuestInfo();
     }, [accessToken]);
 
     if (isLoading) return <p>Loading...</p>;
