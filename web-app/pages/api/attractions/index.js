@@ -29,13 +29,15 @@ export default async function handler(req, res) {
         console.log(user_input);
 
         const weather_data = await fetchWeatherData(user_input.date_range.start, user_input.date_range.end, 'Toronto');
-        const attractions_data = await recommend(user_input, 'attractions');
-        const restaurants_data = await recommend(user_input, 'restaurants');
+        const [attractions_data, restaurants_data] = await Promise.all([
+            recommend(user_input, 'attractions'),
+            recommend(user_input, 'restaurants')
+        ]);
         
         const response = await generateLLMResponse(attractions_data, restaurants_data, weather_data, user_input, 'Toronto');
         console.log(response);        
 
-        return res.status(200).json(response);
+        return res.status(200).json(JSON.parse(response));
     } 
 
     else if (req.method === 'GET') {

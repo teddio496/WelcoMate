@@ -19,53 +19,53 @@ export default async function generateResponse(attractions_data, restaurants_dat
         
         const jsonTemplate = 
         `{
-            'day_1': {
-                'weather': {
-                    'high': '...',
-                    'low': '...',
-                    'condition': '...'
-                },
-                'breakfast': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...'
-                },
-                'morning': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...',
-                    'link_url': '...'
-                },
-                'lunch': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...'
-                },
-                'afternoon': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...',
-                    'link_url': '...'
-                },
-                'dinner': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...'
-                },
-                'night': {
-                    'title': '...',
-                    'address': '...',
-                    'description': '...',
-                    'imageLink': '...',
-                    'link_url': '...'
-                }
+            "day_1": {
+            "weather": {
+                "high": "...",
+                "low": "...",
+                "condition": "..."
             },
-            'day_N': { 
+            "breakfast": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "..."
+            },
+            "morning": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "...",
+                "link_url": "..."
+            },
+            "lunch": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "..."
+            },
+            "afternoon": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "...",
+                "link_url": "..."
+            },
+            "dinner": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "..."
+            },
+            "night": {
+                "title": "...",
+                "address": "...",
+                "description": "...",
+                "imageLink": "...",
+                "link_url": "..."
+            }
+            },
+            "day_N": { 
                 // Repeat the structure for other days 
             }
         }`;
