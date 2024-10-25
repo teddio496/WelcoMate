@@ -16,7 +16,7 @@ export const Dashboard = () => {
         if (accessTokenCookie) {
             const token = accessTokenCookie.split('=')[1];
             try {
-                const decodedToken = jwt.decode(token);  // jwt.decode instead of jwt.verify unless you have the secret
+                const decodedToken = jwt.decode(token);  
                 setRoomNumber(decodedToken.roomNumber);
                 setCheckinDate(decodedToken.checkinDate);
             } catch (error) {
@@ -25,7 +25,7 @@ export const Dashboard = () => {
         } else {
             console.log('Access token not found in cookies');
         }
-    }, []);  // Empty dependency array ensures this runs once after the initial render
+    }, []);
 
     return (
         <div>
