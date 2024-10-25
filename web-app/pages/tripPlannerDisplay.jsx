@@ -51,7 +51,7 @@ const TripPlanner = () => {
 
     return (
         <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 text-black">Trip Plan - Day {currentPlanIndex + 1}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Trip Plan - Day {currentPlanIndex + 1}</h2>
             
             {currentDay ? (
                 <div className="space-y-8">
