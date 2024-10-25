@@ -76,10 +76,20 @@ model Attraction {
   tags           Tag[]
 }
 
+model Restaurant {
+  id          Int    @id @default(autoincrement())
+  title       String
+  address     String
+  description String
+  imageLink   String
+  tags        Tag[]
+}
+
 model Tag {
   id         Int          @id @default(autoincrement())
   name       String       @unique
   Attraction Attraction[]
+  Restaurant Restaurant[]
 }
 
 model Plan {

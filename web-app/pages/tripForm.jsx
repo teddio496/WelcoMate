@@ -2,49 +2,90 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-export const TripForm = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+
+const TripForm = () => {
+
+    const today = new Date(); 
+    
+    const maxSelectableDate = new Date();
+    maxSelectableDate.setDate(today.getDate() + 4); 
+
+    const [startDate, setStartDate] = useState(today);
+    const [endDate, setEndDate] = useState(today);
 
     const [formData, setFormData] = useState({
-        dateRange: '',
+        dateRange: {
+            startDate: today,
+            endDate: today
+        },
         purposeOfTrip: '',
+        whoIsTravelling: '',
         interests: '',
         preferences: '',
         otherInfo: ''
     });
 
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            dateRange: {
+                ...prevFormData.dateRange,
+                startDate: date
+            }
+        }));
+    };
+
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            dateRange: {
+                ...prevFormData.dateRange,
+                endDate: date
+            }
+        }));
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
-        ...formData,
-        [name]: value
+            ...formData,
+            [name]: value
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // You can handle form submission here, like sending data to a server or displaying it in another component.
         console.log(formData);
     };
+
 
     return (
         <div className="trip-form-container">
         <h2>Plan Your Trip</h2>
         <form onSubmit={handleSubmit} className="trip-form">
-            {/* Date Range Input */}
+
             <div className="form-group">
             <label htmlFor="startDate">Start Date: </label>
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker 
+                selected={startDate} 
+                onChange={handleStartDateChange} 
+                minDate={today}          
+                maxDate={maxSelectableDate} 
+            />
             </div>
 
-            {/* Date Range Input */}
             <div className="form-group">
             <label htmlFor="endDate">End Date: </label>
-            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+            <DatePicker 
+                selected={endDate} 
+                onChange={handleEndDateChange} 
+                minDate={startDate}        
+                maxDate={maxSelectableDate}  
+            />
             </div>
 
-            {/* Purpose of Trip Dropdown */}
             <div className="form-group">
             <label htmlFor="purposeOfTrip">Purpose of Trip</label>
             <select
@@ -55,15 +96,15 @@ export const TripForm = () => {
                 required
             >
                 <option value="" disabled>Select a purpose</option>
-                <option value="Vacation">Vacation</option>
-                <option value="Business">Business</option>
                 <option value="Leisure">Leisure</option>
+                <option value="Business">Business</option>
+                <option value="Education">Education</option>
+                <option value="Leisure">Religious</option>
                 <option value="Family">Family</option>
                 <option value="Other">Other</option>
             </select>
             </div>
 
-            {/* Who is travelling with you? */}
             <div className="form-group">
             <label htmlFor="whoIsTravelling">Who is travelling with you?</label>
             <select
@@ -81,7 +122,6 @@ export const TripForm = () => {
             </select>
             </div>
 
-            {/* Interests/Hobbies Textbox */}
             <div className="form-group">
             <label htmlFor="interests">Interests/Hobbies</label>
             <textarea
@@ -94,7 +134,6 @@ export const TripForm = () => {
             ></textarea>
             </div>
 
-            {/* Attraction Preferences Textbox */}
             <div className="form-group">
             <label htmlFor="preferences">Attraction Preferences</label>
             <textarea
@@ -107,7 +146,6 @@ export const TripForm = () => {
             ></textarea>
             </div>
 
-            {/* Other Information Textbox */}
             <div className="form-group">
             <label htmlFor="otherInfo">Are there any other things you want to tell us?</label>
             <textarea
@@ -119,9 +157,10 @@ export const TripForm = () => {
             ></textarea>
             </div>
 
-            {/* Submit Button */}
             <button type="submit" className="submit-btn">Submit</button>
         </form>
         </div>
     );
 };
+
+export default TripForm;

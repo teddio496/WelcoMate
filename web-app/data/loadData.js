@@ -1,5 +1,6 @@
 import loadAttractions from './attractions/loadAttractions.js';
 import loadHotelServices from './hotel_services/loadHotelServices.js';
+import loadRestaurants from './restaurants/loadRestaurants.js';
 import process from 'process';
 
 const loadingFunc = process.argv[2];
@@ -17,6 +18,9 @@ try {
     }
     else if (loadingFunc === 'hotel_services') {
         loadHotelServices(filename);
+    }
+    else if (loadingFunc === 'restaurants') {
+        loadRestaurants(filename);
     }
 }
 catch (error) {
