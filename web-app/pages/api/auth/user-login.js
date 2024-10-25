@@ -22,8 +22,8 @@ export default async function handler(req, res) {
 
   const accessToken = jwt.sign(
     {
-      roomNumber: guest.room_number,
-      checkinDate: guest.checkin_date
+      roomNumber: guest.roomNumber,
+      checkinDate: guest.checkinDate
     },
     ACCESS_TOKEN_SECRET,
     { expiresIn: '15m' }

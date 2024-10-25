@@ -16,7 +16,6 @@ export const Dashboard = () => {
         if (accessTokenCookie) {
             const token = accessTokenCookie.split('=')[1];
             try {
-                // Assuming you have a secret to verify the token
                 const decodedToken = jwt.decode(token);  // jwt.decode instead of jwt.verify unless you have the secret
                 setRoomNumber(decodedToken.roomNumber);
                 setCheckinDate(decodedToken.checkinDate);
