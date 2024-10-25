@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       checkinDate: guest.checkinDate
     },
     ACCESS_TOKEN_SECRET,
-    { expiresIn: '15m' }
+    { expiresIn: '1d' }
   );
   const refreshToken = jwt.sign(
     { guestId: guest.id },

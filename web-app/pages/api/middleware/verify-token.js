@@ -5,6 +5,7 @@ export default async function verifyToken(req, res, next) {
   if (!authHeader) {
     return res.status(401).json({ message: "authorization header missing" });
   }
+  console.log("Authorization header is there");
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);

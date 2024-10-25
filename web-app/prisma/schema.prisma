@@ -47,7 +47,6 @@ model HotelGuest {
   id              Int                   @id @default(autoincrement())
   hotelId         Int
   roomNumber      Int
-  planId          Int
   checkinDate     DateTime
   checkoutDate    DateTime
   email           String
