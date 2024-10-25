@@ -34,13 +34,14 @@ export default async function handler(req, res) {
     { expiresIn: '14d' }
   );
 
+  /*
   await prisma.hotelGuest.update({
     where: { id: guest.id },
     data: {
       loginToken: null, 
     },
   });
-
+  */
   res.setHeader('Set-Cookie', [
     `accessToken=${accessToken}; Path=/; Max-Age=900`,
     `refreshToken=${refreshToken}; Path=/; Max-Age=${14 * 24 * 60 * 60}` 

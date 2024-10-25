@@ -1,18 +1,21 @@
 import verifyToken from "../../middleware/verify-token";
 import { prisma } from '@/utils/prismaClient';
 
-function getGuestInfo(req, res) {
+async function getGuestInfo(req, res) {
   if (req.method === "GET") {
     const { roomNumber, checkinDate } = req.user; 
     console.log(req.user);
+    console.log("Room Number: ", roomNumber);
+    console.log("Check-in Date: ", checkinDate);
     try {
-      const guest = prisma.hotelGuest.findUnique({
+      const guest = await prisma.HotelGuest.findMany({
         where: {
-          roomNumber: roomNumber,
-          checkinDate: checkinDate,
+          roomNumber,
+          checkinDate,
         }
       });
-      res.status(201).json({ guestInfo: guest }); 
+      console.log(guest[0]);
+      res.status(200).json({ guestInfo: guest[0] }); 
     }
     catch (e) {
       console.log(e);
