@@ -24,10 +24,10 @@ export default async function handler(req, res) {
 
         console.log(user_input);
 
-        const weather_data = await fetchWeatherData(user_input.date_range.start, user_input.date_range.end);
+        const weather_data = await fetchWeatherData(user_input.date_range.start, user_input.date_range.end, 'Toronto');
         const attractions_data = await recommendAttractions(user_input);
         
-        const response = await generateLLMResponse(attractions_data, weather_data, user_input);
+        const response = await generateLLMResponse(attractions_data, weather_data, user_input, 'Toronto');
         const plan = JSON.parse(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
 
         return res.status(200).json(plan);

@@ -1,11 +1,11 @@
 import weather from 'weather-js';
 
-export default async function fetchWeatherData(startDate, endDate) {
+export default async function fetchWeatherData(startDate, endDate, city) {
     const weatherData = [];
     const endDateObj = new Date(endDate);
 
     return new Promise((resolve, reject) => {
-        weather.find({ search: process.env.CITY, degreeType: 'C' }, (err, result) => {
+        weather.find({ search: city, degreeType: 'C' }, (err, result) => {
             if (err) {
                 return reject(err);
             }
