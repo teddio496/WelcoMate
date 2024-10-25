@@ -15,7 +15,7 @@ export const HotelService = ({ accessToken }) => {
                     },
                 });
                 console.log(response);
-                
+
                 if (!response.ok) {
                     console.log("HERE IS THE RESPONSE: " + response.status);
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -23,7 +23,7 @@ export const HotelService = ({ accessToken }) => {
 
                 const data = await response.json();
                 console.log(data);
-                console.log(data.guestInfo)
+                console.log(data.guestInfo);
                 setGuestInfo(data.guestInfo);
             } catch (error) {
                 setError("Error fetching guest info");

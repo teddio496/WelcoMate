@@ -3,19 +3,23 @@ import { prisma } from '@/utils/prismaClient';
 
 async function getGuestInfo(req, res) {
   if (req.method === "GET") {
-    const { roomNumber, checkinDate } = req.user; 
+    const { roomNumber, checkinDate } = req.user;
     console.log(req.user);
     console.log("Room Number: ", roomNumber);
     console.log("Check-in Date: ", checkinDate);
     try {
-      const guest = await prisma.HotelGuest.findMany({
+      const guest = await prisma.hotelGuest.findMany({
         where: {
           roomNumber,
           checkinDate,
+        },
+        include: {
+          plansList: true,
+          serviceBookings: true,
         }
       });
       console.log(guest[0]);
-      res.status(200).json({ guestInfo: guest[0] }); 
+      res.status(200).json({ guestInfo: guest[0] });
     }
     catch (e) {
       console.log(e);

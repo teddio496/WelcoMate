@@ -9,7 +9,7 @@ export default async function verifyToken(req, res, next) {
   const token = authHeader.split(' ')[1];
   console.log("Token: ", token);
   try {
-    console.log(jwt.decode(token))
+    console.log(jwt.decode(token));
     req.user = jwt.decode(token);
     console.log("User: ", req.user);
     next();

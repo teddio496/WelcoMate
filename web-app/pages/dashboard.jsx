@@ -4,7 +4,6 @@ import HotelService from "@/component/HotelService";
 import ActivitiesPanel from '@/component/ActivitiesPanel';
 import ServicesView from '@/component/ServicesView';
 
-
 export const Dashboard = () => {
     const [roomNumber, setRoomNumber] = useState('');
     const [checkinDate, setCheckinDate] = useState('');

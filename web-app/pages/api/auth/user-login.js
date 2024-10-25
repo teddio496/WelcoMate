@@ -43,8 +43,8 @@ export default async function handler(req, res) {
   });
   */
   res.setHeader('Set-Cookie', [
-    `accessToken=${accessToken}; Path=/; Max-Age=900`,
-    `refreshToken=${refreshToken}; Path=/; Max-Age=${14 * 24 * 60 * 60}` 
+    `accessToken=${accessToken}; Path=/; Max-Age=604800`,
+    `refreshToken=${refreshToken}; Path=/; Max-Age=604800` 
   ]);
   res.redirect("/", 302);
 }
