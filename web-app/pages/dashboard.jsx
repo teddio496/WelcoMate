@@ -16,14 +16,16 @@ export const Dashboard = () => {
         if (accessTokenCookie) {
             const token = accessTokenCookie.split('=')[1];
             try {
-
-            } catch (e) {
-                console.error(e);
+                const decodedToken = jwt.decode(token);  
+                setRoomNumber(decodedToken.roomNumber);
+                setCheckinDate(decodedToken.checkinDate);
+            } catch (error) {
+                console.error('Error decoding token:', error);
             }
         } else {
             console.log('Access token not found in cookies');
         }
-    }, []);  // Empty dependency array ensures this runs once after the initial render
+    }, []);
 
     return (
         <div>
