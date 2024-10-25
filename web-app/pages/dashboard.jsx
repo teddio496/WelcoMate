@@ -33,13 +33,36 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <p>Room Number: {roomNumber}</p>
-            <p>Check-in Date: {checkinDate}</p>
-            <HotelService accessToken={accessToken} /> 
-            <ActivitiesPanel accessToken={accessToken} />
+        <div className="flex min-h-screen">
+        {/* Left Column - 15% Width */}
+        <div className="w-1/6 bg-gray-100 hidden lg:block"></div>
+
+        {/* Main Content - 70% Width */}
+        <div className="w-full lg:w-4/6 p-4">
+            <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+            <p className="mb-2">Room Number: {roomNumber || 'Unavailable'}</p>
+            <p className="mb-4">Check-in Date: {checkinDate || 'Unavailable'}</p>
+            {accessToken ? (
+                <> 
+                <div className='flex'>
+                    <div className='w-1/2 border-white'>
+                    <h1>Hotel Service</h1>
+                        <HotelService accessToken={accessToken} /> 
+                    </div>
+                    <div className='w-1/2'>
+                        <ActivitiesPanel accessToken={accessToken}/>
+                    </div>
+                </div>
+
+                </>
+            ) : (
+                <p>Please log in to access your dashboard services.</p>
+            )}
             <ServicesView />
         </div>
+
+        {/* Right Column - 15% Width */}
+        <div className="w-1/6 bg-gray-100 hidden lg:block"></div>
+    </div>
     );
 };
