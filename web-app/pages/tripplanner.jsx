@@ -47,7 +47,7 @@ const TripForm = () => {
     };
 
     return (
-        <div className="trip-form-container flex justify-center items-center min-h-screen bg-warm-white">
+        <div className=" flex justify-center bg-warm-white">
             <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 sm:w-7/10 md:w-3/5 lg:w-2/5">
                 <h2 className="text-4xl font-medium mb-6 text-center">Plan Your Trip</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
