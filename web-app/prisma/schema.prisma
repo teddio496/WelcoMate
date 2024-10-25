@@ -84,4 +84,6 @@ model Tag {
 model Plan {
   id         Int         @id @default(autoincrement())
   plan       String
+
+  HotelGuest HotelGuest[]
 }
