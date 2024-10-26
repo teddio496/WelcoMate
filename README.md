@@ -15,7 +15,7 @@
 
 **How to install and run the project**:  
 First, navigate to /web-app.  
-Then install dependencies using `npm i`, then run the development server using `npm run dev`.
+Then install dependencies using `npm i`, then run the development server using `npm run dev`.  
 Now, obtain a Gemini and Google Maps API key:  
 HuggingFace Inference API:  
 Step 1: https://huggingface.co/join  
