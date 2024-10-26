@@ -32,9 +32,9 @@ ACCESS_TOKEN_SECRET="Any string here would do"
 REFRESH_TOKEN_SECRET="Any string here would do"
 ```
 
-Then install dependencies using `npm i`, then run the development server using `npm run dev`.  
-
-
+Then install dependencies using `npm i`, then run the development server using `npm run dev` and visit `localhost:3000` in the browser.  
+No hotel guest is currently logged in, so we have provided an admin account.  
+Visit `localhost:3000/adminLogin` and login with username `davinci` and password `thebesthackathon`.  
 ---
 
 ## Usage Instructions
