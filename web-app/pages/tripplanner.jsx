@@ -11,20 +11,22 @@ const TripForm = () => {
 
     const [startDate, setStartDate] = useState(today);
     const [endDate, setEndDate] = useState(today);
+    
     const [formData, setFormData] = useState({
-        dateRange: { startDate: today, endDate: today },
-        purposeOfTrip: '',
-        whoIsTravelling: '',
+        date_range: { startDate: today, endDate: today },
+        purpose_of_trip: '',
+        who_is_travelling: '',
         interests: '',
         preferences: '',
-        otherInfo: ''
+        food_preferences: '',
+        other_info: ''
     });
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
         setFormData((prevFormData) => ({
             ...prevFormData,
-            dateRange: { ...prevFormData.dateRange, startDate: date }
+            date_range: { ...prevFormData.date_range, startDate: date }
         }));
     };
 
@@ -32,7 +34,7 @@ const TripForm = () => {
         setEndDate(date);
         setFormData((prevFormData) => ({
             ...prevFormData,
-            dateRange: { ...prevFormData.dateRange, endDate: date }
+            date_range: { ...prevFormData.date_range, endDate: date }
         }));
     };
 
@@ -41,13 +43,41 @@ const TripForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        const formattedFormData = {
+            ...formData,
+            date_range: {
+                start: formData.date_range.startDate.toISOString().split('T')[0],
+                end: formData.date_range.endDate.toISOString().split('T')[0]
+            }
+        };
+        console.log(formattedFormData);
+
+        try {
+            const response = await fetch('/api/generateTrip', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formattedFormData)
+            });
+
+            if (response.ok) {
+                console.log(response);
+            } 
+            else {
+                console.log('Error:', response.statusText);
+            }
+        } 
+        catch (error) {
+            console.log('Error:', error);
+        }
+
     };
 
     return (
-        <div className=" flex justify-center bg-warm-white">
+        <div className="flex justify-center bg-warm-white">
             <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 sm:w-7/10 md:w-3/5 lg:w-2/5">
                 <h2 className="text-4xl font-medium mb-6 text-center">Plan Your Trip</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -74,11 +104,11 @@ const TripForm = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="purposeOfTrip" className="text-lg font-medium">Purpose of Trip</label>
+                        <label htmlFor="purpose_of_trip" className="text-lg font-medium">Purpose of Trip</label>
                         <select
-                            id="purposeOfTrip"
-                            name="purposeOfTrip"
-                            value={formData.purposeOfTrip}
+                            id="purpose_of_trip"
+                            name="purpose_of_trip"
+                            value={formData.purpose_of_trip}
                             onChange={handleInputChange}
                             required
                             className="w-full p-2 border border-gray-300 rounded"
@@ -94,11 +124,11 @@ const TripForm = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="whoIsTravelling" className="text-lg font-medium">Who is travelling with you?</label>
+                        <label htmlFor="who_is_travelling" className="text-lg font-medium">Who is travelling with you?</label>
                         <select
-                            id="whoIsTravelling"
-                            name="whoIsTravelling"
-                            value={formData.whoIsTravelling}
+                            id="who_is_travelling"
+                            name="who_is_travelling"
+                            value={formData.who_is_travelling}
                             onChange={handleInputChange}
                             required
                             className="w-full p-2 border border-gray-300 rounded"
@@ -131,18 +161,31 @@ const TripForm = () => {
                             name="preferences"
                             value={formData.preferences}
                             onChange={handleInputChange}
-                            placeholder="Do you prefer indoor or outdoor attractions?"
+                            placeholder="What type of attractions do you prefer?"
                             required
                             className="w-full p-2 border border-gray-300 rounded"
                         ></textarea>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="otherInfo" className="text-lg font-medium">Are there any other things you want to tell us?</label>
+                        <label htmlFor="food_preferences" className="text-lg font-medium">Food Preferences</label>
                         <textarea
-                            id="otherInfo"
-                            name="otherInfo"
-                            value={formData.otherInfo}
+                            id="food_preferences"
+                            name="food_preferences"
+                            value={formData.food_preferences}
+                            onChange={handleInputChange}
+                            placeholder="What type of food do you prefer?"
+                            required
+                            className="w-full p-2 border border-gray-300 rounded"
+                        ></textarea>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="other_info" className="text-lg font-medium">Are there any other things you want to tell us?</label>
+                        <textarea
+                            id="other_info"
+                            name="other_info"
+                            value={formData.other_info}
                             onChange={handleInputChange}
                             placeholder="Any other information?"
                             className="w-full p-2 border border-gray-300 rounded"
