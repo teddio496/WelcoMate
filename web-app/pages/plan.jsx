@@ -133,7 +133,8 @@ const TripPlanner = () => {
                 </div>
             </div>
 
-            {/* Map Component */}
+            <div className="w-1/12"></div>
+
             <div className="w-2/6">
                 <MapComponent address={address} />
             </div>
