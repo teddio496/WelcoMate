@@ -14,8 +14,7 @@
 ## Installation & Setup
 
 **How to install and run the project**:  
-Install dependencies using `npm i`.
-Run the development server using `npm run dev`.
+Install dependencies using `npm i`, then run the development server using `npm run dev`.
 
 ---
 
