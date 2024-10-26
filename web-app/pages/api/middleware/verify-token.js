@@ -1,11 +1,12 @@
 import * as jwt from "jsonwebtoken";
 
 export default async function verifyToken(req, res, next) {
+  console.log("MIDDLEWARE RUNNING");
   const authHeader = req.headers["authorization"];
   if (!authHeader) {
     return res.status(401).json({ message: "authorization header missing" });
   }
-  // console.log("Authorization header is there");
+  console.log("Authorization header is there");
   const token = authHeader.split(' ')[1];
   // console.log("Token: ", token);
   try {

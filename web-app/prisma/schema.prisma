@@ -17,6 +17,7 @@ model Hotel {
   services        HotelService[]
   serviceBookings HotelServiceBooking[]
   guests          HotelGuest[]
+  Admin           Admin[]
 }
 
 model HotelService {
@@ -58,7 +59,7 @@ model HotelGuest {
   serviceBookings HotelServiceBooking[]
   hotel           Hotel                 @relation(fields: [hotelId], references: [id])
   plansList       Plan[]
-  
+
   @@unique([roomNumber, checkinDate])
   @@index([hotelId])
 }
@@ -97,4 +98,15 @@ model Plan {
   plan         String
   hotelGuestId Int
   HotelGuest   HotelGuest @relation(fields: [hotelGuestId], references: [id])
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  hotelId   Int
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+  hotel     Hotel    @relation(fields: [hotelId], references: [id])
+
+  @@unique([hotelId, username])
 }

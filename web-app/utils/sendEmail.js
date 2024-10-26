@@ -60,9 +60,8 @@ export default async function sendEmail(to, subject, loginUrl) {
             Thank you for staying with us! To access your account and manage your
             stay, click the button below to securely log in.
           </p>
-          <a href="${loginUrl}" class="login-button">Log In to Your Account</a>
-          <p>If the button above doesn't work, copy and paste this URL into your browser:</p>
-          <p><a href="${loginUrl}">${loginUrl}</a></p>
+          <a href="http://${loginUrl}" class="login-button">Log In to Your Account</a>
+          <p><a href=${loginUrl}">${loginUrl}</a></p>
         </div>
       </body>
     </html>
