@@ -42,7 +42,7 @@ export const ActivitiesPanel = () => {
     fetchData();
   }, []);
   return (
-    <div className="overflow-y-auto h-[700px] shadow-lg border border-black border-4 rounded-lg">
+    <div className="overflow-y-auto h-[700px] shadow-lg  rounded-lg">
       {(guestInfo && plan) ? (
         <Activity
           activity={plan["day_1"]} // only display day 1
@@ -51,6 +51,7 @@ export const ActivitiesPanel = () => {
         <p>No guest information available.</p>
       )}
     </div>
+
   );
 };
 

@@ -1,68 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import dynamic from 'next/dynamic';
+import 'leaflet/dist/leaflet.css'; 
+import { useState, useEffect } from 'react';
 
-const googleMaps = () => {
-  // Set the container style for the map
-  const [address, setAddress] = useState("beijing")
-  const mapContainerStyle = {
-    width: '100%',
-    height: '400px'
-  };
+// Dynamically import the MapContainer, TileLayer, and other Leaflet components
+const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
 
-  // State to manage markers and map center
-  const [markers, setMarkers] = useState([]);
-  const [mapCenter, setMapCenter] = useState(null); // Initially null to avoid centering before geocoding is done
+const MapComponent = ({ address }) => {
 
-  // Function to fetch coordinates from the address using Geocoding API
-  const geocodeAddress = async (address) => {
-    const geocoder = new window.google.maps.Geocoder();
-    return new Promise((resolve, reject) => {
-      geocoder.geocode({ address: address }, (results, status) => {
-        if (status === 'OK' && results[0]) {
-          const { lat, lng } = results[0].geometry.location;
-          resolve({ lat: lat(), lng: lng() });
-        } else {
-          reject('Geocode was not successful: ' + status);
-        }
-      });
-    });
-  };
+  // default position is Toronto
+  const [position, setPosition] = useState([43.6532, -79.3832]);
 
-  // Effect to geocode the address passed as a prop
   useEffect(() => {
-    if (address) {
-      geocodeAddress(address)
-        .then((location) => {
-          setMapCenter(location);  // Set the map center to the geocoded location
-          setMarkers([{ ...location, id: 1 }]); // Add a marker at the geocoded location
-        })
-        .catch((error) => {
-          console.error('Error geocoding address:', error);
-        });
-    }
-  }, [address]);
+    const fetchCoordinates = async () => {
+      if (!address) return;
+
+      const { OpenStreetMapProvider } = await import('leaflet-geosearch');
+      const provider = new OpenStreetMapProvider();
+      const results = await provider.search({ query: address });
+
+      if (results && results.length > 0) {
+        const { x: lon, y: lat } = results[0]; // Get the longitude (x) and latitude (y)
+        setPosition([lat, lon]); // Set the map position to the geocoded coordinates
+      } else {
+        console.log('No results found');
+      }
+    };
+
+    fetchCoordinates();
+  }, [address]); 
 
   return (
-    <div>
-      <LoadScript
-        googleMapsApiKey = {process.env.GOOGLE_MAPS_KEY} // Replace with your own API key
-        loadingElement={<div>Loading...</div>} // Optional loading element
-      >
-        {mapCenter && (  // Only render the map when mapCenter is available
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={mapCenter}
-            zoom={12}
-          >
-            {/* Render all markers */}
-            {markers.map(marker => (
-              <Marker key={marker.id} position={{ lat: marker.lat, lng: marker.lng }} />
-            ))}
-          </GoogleMap>
-        )}
-      </LoadScript>
-    </div>
+    <MapContainer center={position} zoom={10} style={{ height: '92vh', width: '60vh', position: 'fixed' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position}>
+        <Popup>
+          {`${address}`}
+        </Popup>
+      </Marker>
+    </MapContainer>
   );
 };
 
-export default googleMaps;
+export default MapComponent;
