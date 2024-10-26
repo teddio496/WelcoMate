@@ -1,24 +1,25 @@
 Group Name: The Brunelleschi Group aka TBG
 Group Project: WelcoMate (pronounced as “Welcome Mate”)
-Members: Patrick Hu, Teddy Heo, Albert Ho, Eddy Pham, Oscar Pang
+Members: Patrick Hu, Jaehyeon Heo (Teddy), Albert Ho, Eddy Pham, Oscar Pang
 
 
 Business: We are, first and foremost, a software as a service company (Saas) specialize in guest-experience application providing for middle to large scale hotels and resorts, and later, corporations and educational institutions (B2B).
 
 The current hotel software management industry has put all of their technological innovations in maximizing efficiency and minimizing cost on the hotel operations side, but has lacked behind in terms of guest-side software, currently providing minimal features like auto check-in, room calls,...
 
-Our business begins as an all-in-one property management system (PMS) that matches with the current industry standard. Our standout function is a well-thought-out guest-end application that provides all the tools and hotel services at the screen of their devices. Our flagship feature, and a core component of our business, is our AI trip planner. It relies on our comprehensive database of attractions, restaurants, shopping centres, and other tourism hot-spots, combining with other factors (weather data, cost, distance, calendar,...) with user input to generate a tailored travel plan for the guest’s duration of stay, combining the best local attractions with services offered by the hotel.
+Our business begins as an all-in-one property management system (PMS) that matches with the current industry standard. Our standout function is a well-thought-out guest-end application that provides all the tools and hotel services at the screen of their devices. Our flagship feature, and a core component of our business, is our AI trip planner. It relies on our comprehensive database of attractions and restaurants, combining with other factors including weather data, date ranges, and user input on interests and preferences to generate a tailored travel plan for the guest’s duration of stay, combining the best local attractions with services offered by the hotel.
 
 
-Technology: We used Next.js for hosting the website and handling backend functionalities like managing CSV and JSON files. 
-
-For our backend, after filling out the form, the information gets sent as a JSON to our backend API. First we will fetch the weather using a weather API based on the date ranges, then we fetch a list of recommended attractions and restaurants using the sentence transformer from the HuggingFace library (all-MiniLM-L6-v2) to calculate based on semantic similarities between the user input and the attractions and restaurant descriptions. It then sends the data to the Gemini API to dynamically generate personalized trip plans.
-
+Technology: We used Next.js for building the website and handling backend functionalities like managing a database
 
 SQLite is used as a local database to store all relevant data efficiently. We use Prisma to manage the relationships between various entities in the database. These include models for Hotels, HotelServices, HotelServiceBooking, HotelGuest, Attraction, Restaurant, Tag, and Plan.
 
+We used Python, specifically the Pandas and library, to process CSV datasets containing information on Toronto attractions, restaurants, and hotel services, facilitating data collection, processing, and loading for the database.
 
-For our data collection, processing and loading, we used Python, particularly the Pandas library, in order to process CSV datasets for Toronto attractions, restaurants, and the services for our specific hotel. 
+For our AI trip planner, the user begins by filling out a form, which sends the information as JSON to our backend API. First, we retrieve the weather data using a weather API based on the selected date range. Next, we generate a list of recommended attractions and restaurants using Hugging Face’s sentence transformer to identify semantic similarities between the user's preferences and the locations' descriptions. Finally, all the data is sent to the Gemini API to dynamically generate personalized trip plans.
 
 
-For the frontend, React is the core technology powering the user interface. It handles key components including the landing page (dashboard), (maps), and the trip planner display. We used TailwindCSS to create responsive designs across the website. 
+For the frontend, React is the core technology powering the user interface. It handles key components including the landing page, admin panel to verify new users (mimicking an online check-in system), services page for users to access what the hotel has to offer, and the trip planner display. We used TailwindCSS to create responsive designs across the website. 
+
+
+We also created a tokenized account generation process, which allows new customers to easily register and access our services through a secure, unique token. This frictionless login experience simplifies guest onboarding, making our platform as accessible and convenient as possible.
