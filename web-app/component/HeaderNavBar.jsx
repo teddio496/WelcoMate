@@ -1,7 +1,7 @@
 import React from 'react';
 
 function HeaderNavBar() {
-  const navItems = ['Service', 'TripPlanner', 'Reservations', 'Account'];
+  const navItems = ['Service', 'TripPlanner', 'Plan'];
 
   return (
     <header  style={{ backgroundColor: '#E2DCC8', padding: 12,boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' }} > 
