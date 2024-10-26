@@ -56,6 +56,7 @@ export default async function handler(req, res) {
             }
             catch (error) {
                 console.log('Failed to parse response. Retrying...');
+                retries++;
             }   
         }
 
