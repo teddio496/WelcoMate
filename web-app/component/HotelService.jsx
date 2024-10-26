@@ -90,7 +90,7 @@ const HotelService = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="overflow-y-auto h-[700px] shadow-lg border border-black border-4 rounded-lg">
+    <div className="overflow-y-auto h-[700px] shadow-lg  rounded-lg">
       {guestInfo ? (
         services.length > 0 ? (
           services.map((service) => (

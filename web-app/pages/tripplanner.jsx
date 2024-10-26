@@ -73,7 +73,7 @@ const TripForm = () => {
                 console.log('Error:', response.statusText);
             }
             console.log("Navigating to tripPlannerDisplay");
-            window.location.href = '/tripPlannerDisplay';
+            window.location.href = '/plan';
 
         } catch (error) {
             console.log('Error:', error);

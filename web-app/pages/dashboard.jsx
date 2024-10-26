@@ -64,7 +64,7 @@ export const Dashboard = () => {
     <div className="flex min-h-screen">
       <div className="w-1/6 hidden lg:block"></div>
 
-      <div className="w-full lg:w-4/6 p-4 bg-warm-white rounded-lg" style={{ boxShadow: '0 15px 30px rgba(0, 0, 0, 0.25)' }}>
+      <div className="w-full lg:w-4/6 p-4 bg-warm-white rounded-lg" style={{ boxShadow: '0 15px 30px rgba(0, 0, 0, 0.25)' }} >
         <div className="relative">
           <img
             src="https://www.shhotelsandresorts.com/sites/default/files/styles/scale_crop_1280x600/public/brandfolder/sbx829qxqctgttnvnpb44gf/231218_1_Hotel_MR_Kingw1921.png?h=f0fb51a5&itok=g8hn-K2z"
