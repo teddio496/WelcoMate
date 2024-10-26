@@ -104,11 +104,8 @@ export const Dashboard = () => {
               <HotelService />
             </div>
             <div className="w-1/2 p-16">
-              <h1 className="p-1 text-2xl mb-2">
-                Trip Itinerary
-                <span className="ml-2 px-2 py-1 rounded-lg bg-gray-200">
-                  Day 1
-                </span>
+              <h1 className="p-1 text-2xl mb-2"> Trip Itinerary
+                <span className="ml-2 px-2 py-1 rounded-lg bg-gray-200">Day 1</span>
               </h1>
               <ActivitiesPanel />
             </div>

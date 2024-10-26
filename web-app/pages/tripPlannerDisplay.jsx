@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import googleMaps from '@/component/googleMaps';
+// import googleMaps from '@/component/googleMaps';
 
 const TripPlanner = () => {
     const [plans, setPlans] = useState(null);
@@ -10,13 +10,13 @@ const TripPlanner = () => {
             try {
                 const planIdResponse = await fetch('/api/plan?id=1');
                 const planId = await planIdResponse.json();
-                // console.log(planId);
+                console.log(planId);
 
                 const plan = planId.planId;
-                // console.log(plan);
+                console.log(plan);
                 const planResponse = await fetch(`/api/generateTrip?planId=${plan}`);
                 const t = await planResponse.json();
-                console.log(t);
+                // console.log(t);
                 setPlans(t);
             }
             catch (error) {
@@ -47,7 +47,9 @@ const TripPlanner = () => {
     const currentDay = plans[currentDayKey];
 
     return (
-        <div className="p-4 flex">
+        <div className="flex min-h-screen">
+            <div className="w-1/6 hidden lg:block"></div>
+            <div className="p-4 flex w-2/6">
             <div>
                 <h2 className="text-2xl font-bold mb-4 text-white">Trip Plan - Day {currentPlanIndex + 1}</h2>
 
@@ -146,8 +148,10 @@ const TripPlanner = () => {
             </div>
 
             <googleMaps />
+            </div>
+            <div className='w-2/6'></div>
+            <div className="w-1/6 hidden lg:block"></div>
         </div>
-
     );
 
 };
