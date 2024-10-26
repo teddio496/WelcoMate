@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import GoogleMapComponent from '@/component/googleMaps';
+import googleMaps from '@/component/googleMaps';
 
 const TripPlanner = () => {
-    
     const [plans, setPlans] = useState(null); 
     const [currentPlanIndex, setCurrentPlanIndex] = useState(0);  
 
@@ -144,7 +143,8 @@ const TripPlanner = () => {
                 </div>
                 
             </div>
-            <GoogleMapComponent />
+
+            <googleMaps />
         </div>
         
     );

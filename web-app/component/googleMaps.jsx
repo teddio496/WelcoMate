@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const GoogleMapComponent = () => {
+const googleMaps = () => {
   // Set the container style for the map
   const [address, setAddress] = useState("beijing")
   const mapContainerStyle = {
@@ -65,4 +65,4 @@ const GoogleMapComponent = () => {
   );
 };
 
-export default GoogleMapComponent;
+export default googleMaps;
