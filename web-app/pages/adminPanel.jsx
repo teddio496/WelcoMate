@@ -8,6 +8,8 @@ const AdminPage = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
+  const [loginLink, setLoginLink] = useState("");
+  
   useEffect(() => {
     const fetchGuests = async () => {
       try {
@@ -81,7 +83,7 @@ const AdminPage = () => {
       }
 
       const { link } = await createLoginResponse.json();
-      console.log("link to login to account with name " + guest.fullname +": " + link);
+      setLoginLink(`Link to login to account with name ${guest.fullname}: ${link}`);
       setOpen(true);
     } catch (error) {
       console.error(error);
@@ -137,6 +139,11 @@ const AdminPage = () => {
             ))}
           </tbody>
         </table>
+        {loginLink && (
+          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
+            {loginLink}
+          </div>
+        )}
       </main>
 
       <Snackbar
