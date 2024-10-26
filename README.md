@@ -14,7 +14,8 @@
 ## Installation & Setup
 
 **How to install and run the project**:  
-_TBD_
+Install dependencies using `npm i`.
+Run the development server using `npm run dev`.
 
 ---
 
