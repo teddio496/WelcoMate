@@ -16,12 +16,17 @@ const MapComponent = ({ address }) => {
   useEffect(() => {
     const fetchCoordinates = async () => {
       if (!address) return;
+      
+      if (!address.toLowerCase().includes('toronto')) {
+        address += ', Toronto';
+      }
 
       const { OpenStreetMapProvider } = await import('leaflet-geosearch');
       const provider = new OpenStreetMapProvider();
       const results = await provider.search({ query: address });
 
       if (results && results.length > 0) {
+        console.log(address);
         const { x: lon, y: lat } = results[0]; // Get the longitude (x) and latitude (y)
         setPosition([lat, lon]); // Set the map position to the geocoded coordinates
       } 

@@ -103,6 +103,7 @@ const recommend = async (userInput, attractions_or_restaurants) => {
     
     }
     catch (error) {
+        console.log(error);
         throw new Error('Failed to recommend attractions or restaurants');
     }
 

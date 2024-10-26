@@ -81,16 +81,27 @@ const TripPlanner = () => {
                     ))}
                 </div>
 
-                {/* Trip Plan Details */}
                 <div>
                     <h2 className="text-2xl font-bold mb-4 text-white">Trip Plan - Day {currentPlanIndex + 1}</h2>
 
                     {currentDay ? (
                         <div className="space-y-8">
-                            <div className="bg-gray-300 p-4 rounded-md shadow-md">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Weather</h3>
-                                <p className="text-black">High: {currentDay.weather.high} | Low: {currentDay.weather.low}</p>
-                                <p className="text-black">Condition: {currentDay.weather.condition}</p>
+                            <div className="bg-gray-400 p-6 rounded-lg shadow-lg flex items-center text-white">
+                                <div className="flex-1">
+                                    <h3 className="text-2xl font-bold mb-3">Weather</h3>
+                                    <div className="flex items-center space-x-4">
+                                        <div>
+                                            <p className="text-2xl font-bold">{currentDay.weather.high}°</p>
+                                            <p className="text-sm text-gray">High</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-2xl font-bold">{currentDay.weather.low}°</p>
+                                            <p className="text-sm text-gray">Low</p>
+                                        </div>
+                                    </div>
+                                    <p className="mt-4 text-lg font-medium">{currentDay.weather.condition}</p>
+                                </div>
+                                <img src={currentDay.weather.imageLink} alt="weather" />
                             </div>
 
                             {mealComponent('breakfast', currentDay.breakfast)}
