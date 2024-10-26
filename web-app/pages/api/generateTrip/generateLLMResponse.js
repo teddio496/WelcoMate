@@ -15,7 +15,8 @@ export default async function generateResponse(attractions_data, restaurants_dat
         For each attraction, include only the following keys: title, address, description, imageLink, link_url.
         For each restaurant, include only the following keys: title, address, description, imageLink.
         Tailor each description for the user based on the context of the following prompts: trip type: ${user_info.who_is_travelling}; trip purpose: ${user_info.purpose_of_trip}; 
-        user interests: ${user_info.interests}; user preferences: ${user_info.preferences}; other user info: ${user_info.other_info}.`;
+        user interests: ${user_info.interests}; user preferences: ${user_info.preferences}; other user info: ${user_info.other_info}.
+        Remove any quotation from the descriptions.`;
         
         const jsonTemplate = 
         `{

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import GoogleMapComponent from '@/component/googleMaps';
 
 const TripPlanner = () => {
     
@@ -11,16 +12,12 @@ const TripPlanner = () => {
                 // Fetch all plan IDs for user with ID 1
                 const planIdsResponse = await fetch('http://localhost:3000/api/plan?id=1');
                 const planIds = await planIdsResponse.json();
+                console.log(planIds);
 
                 // Fetch daily plans for each plan ID synchronously
-                const planPromises = planIds.planIds.map(async (planId) => {
-                    const planResponse = await fetch(`http://localhost:3000/api/attractions?planId=${planId}`);
-                    return planResponse.json();
-                });
-
-                const plansData = await Promise.all(planPromises);
-
-                setPlans(plansData[0]); 
+                const plan = planIds.planIds[1]
+                const planResponse = await fetch(`http://localhost:3000/api/generateTrip?planId=${plan}`);
+                setPlans(await planResponse.json()); 
             } 
             catch (error) {
                 console.error('Error fetching plans:', error);
@@ -50,7 +47,8 @@ const TripPlanner = () => {
     const currentDay = plans[currentDayKey];
 
     return (
-        <div className="p-4">
+        <div className="p-4 flex">
+            <div>
             <h2 className="text-2xl font-bold mb-4 text-white">Trip Plan - Day {currentPlanIndex + 1}</h2>
             
             {currentDay ? (
@@ -143,7 +141,10 @@ const TripPlanner = () => {
                 >
                     Next Day
                 </button>
+                </div>
+                
             </div>
+            <GoogleMapComponent />
         </div>
         
     );

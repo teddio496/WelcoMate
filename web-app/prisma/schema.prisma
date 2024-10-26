@@ -95,6 +95,6 @@ model Tag {
 model Plan {
   id           Int        @id @default(autoincrement())
   plan         String
-  hotelGuestId Int @unique
+  hotelGuestId Int
   HotelGuest   HotelGuest @relation(fields: [hotelGuestId], references: [id])
 }
