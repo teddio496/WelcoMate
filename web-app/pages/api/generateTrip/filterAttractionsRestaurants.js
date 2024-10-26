@@ -76,7 +76,7 @@ async function getTopTags(text, tags) {
 
     console.log(tagSimilarities);
 
-    const topTags = tagSimilarities.slice(0, 10).map(item => item.tag);
+    const topTags = tagSimilarities.slice(0, 5).map(item => item.tag);
 
     return topTags;
 }
@@ -94,11 +94,13 @@ const recommend = async (userInput, attractions_or_restaurants) => {
             const text = `${who_is_travelling} ${purpose_of_trip} ${interests} ${preferences}`;
             topTags = await getTopTags(text, attractionsTags);
             topResults = await getAttractions(topTags);
+            console.log(topResults.length);
         }
         else if (attractions_or_restaurants === 'restaurants') {
             const text = `${who_is_travelling} ${interests} ${preferences} ${food_preferences}`;
             topTags = await getTopTags(text, restaurantsTags);
             topResults = await getRestaurants(topTags);
+            console.log(topResults.length);
         }
     
     }
