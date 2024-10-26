@@ -27,7 +27,7 @@ const HotelService = () => {
         const { guestInfo } = await guestResponse.json();
         console.log("GUEST FETCHED: ", guestInfo);
         setGuestInfo(guestInfo);
-        
+
         const servicePromises = guestInfo.serviceBookings.map((serviceBooking) => {
           const id = serviceBooking.id;
           return fetch(`/api/auth/protected/get-service/?id=${id}`, {
@@ -90,26 +90,23 @@ const HotelService = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-<div className="overflow-y-auto h-[700px] shadow-lg border border-black border-4 rounded-lg">
-  {guestInfo ? (
-    services.length > 0 ? (
-      services.map((service) => (
-        <Service
-          key={service.id}
-          service={service}
-          onCancel={() => handleCancelBooking(service.id)}
-        />
-      ))
-    ) : (
-      <p>No services available.</p>
-    )
-  ) : (
-    <p>No guest information available.</p>
-  )}
-</div>
-
-
-
+    <div className="overflow-y-auto h-[700px] shadow-lg border border-black border-4 rounded-lg">
+      {guestInfo ? (
+        services.length > 0 ? (
+          services.map((service) => (
+            <Service
+              key={service.id}
+              service={service}
+              onCancel={() => handleCancelBooking(service.id)}
+            />
+          ))
+        ) : (
+          <p>No services booked.</p>
+        )
+      ) : (
+        <p>No guest information available.</p>
+      )}
+    </div>
   );
 };
 
