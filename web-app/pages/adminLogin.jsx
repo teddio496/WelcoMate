@@ -27,7 +27,8 @@ const Admin = () => {
 
       const data = await response.json();
       console.log("Login successful:", data);
-      router.push("/adminPanel");
+      if (data.success === "admin logged in") router.push("/adminPanel");
+      else router.push("/adminLogin");
     } catch (err) {
       setError(err.message);
     }

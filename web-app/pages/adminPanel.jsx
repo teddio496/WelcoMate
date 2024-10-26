@@ -81,8 +81,7 @@ const AdminPage = () => {
       }
 
       const { link } = await createLoginResponse.json();
-      console.log("LINK FROM CREATE-LOGIN: " + link);
-      console.log("Login created for guest: " + guest.fullname);
+      console.log("link to login to account with name " + guest.fullname +": " + link);
       setOpen(true);
     } catch (error) {
       console.error(error);
