@@ -28,8 +28,8 @@ _TBD_
 ## Credits
 
 This project was created and developed by the following team members:
-- Albert Lam
-- Patrick Hu
-- Teddy Ho
-- Oscar Pang
-- Eddison Pham
+- Albert Lam: Team-Lead/Vision
+- Patrick Hu: Full-stack Developer
+- Teddy Ho: Full-stack Developer
+- Oscar Pang: ML Engineer/Back-end
+- Eddison Pham: ML Engineer/Back-end
