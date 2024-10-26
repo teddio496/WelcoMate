@@ -11,40 +11,53 @@
 
 ---
 
-## Installation & Setup
+## Prerequisites
+Before getting started, ensure that you have the following:
+- **Node.js** installed on your system.
+- API keys for **HuggingFace** and **Gemini** for backend processing.
 
-**How to install and run the project**:  
-First, navigate to /web-app.  
-Now, obtain a Gemini and Google Maps API key:  
-HuggingFace Inference API:  
-Step 1: https://huggingface.co/join  
-Step 2: https://huggingface.co/settings/tokens (click "Create new token")  
+### To obtain the API keys
 
-Gemini API:  
-Step 1: https://ai.google.dev/  
-Step 2: https://aistudio.google.com/app/apikey (click "Create API key")  
+#### HuggingFace Inference API:
+1. Navigate to [HuggingFace](https://huggingface.co/join) to create an account.
+2. Visit your [token settings](https://huggingface.co/settings/tokens) and click **"Create new token"**.
+3. Once the API key is generated, copy it.
+4. Click on the 3 dots next to your token and navigate to **"Edit Permissions"**, then enable **"Make calls to the serverless Inference API"**.
 
-Next, create a .env file in the same directory as /web-app with the following contents:  
-```
-HUGGINGFACE_KEY=YOUR_API_KEY  
-GEMINI_KEY=YOUR_API_KEY  
-ACCESS_TOKEN_SECRET="Any string here would do"  
-REFRESH_TOKEN_SECRET="Any string here would do"
-```
-
-Then install dependencies using `npm i`, then run the development server using `npm run dev` and visit `localhost:3000` in the browser.  
-No hotel guest is currently logged in, so we have provided an admin account for your supposed hotel.  
-Visit `localhost:3000/adminLogin` and login with username `davinci` and password `thebesthackathon`.  
-Here you will see a list of customers pre-registered for your hotel. Click on `Create Login` to send them an email with a link to create their account.  
-Since you cannot access our emails listed, please head over to Chrome Developer Tools by hitting `ctrl+shift+I`  and go to the console and visit the link outputted.  
-Now you are a hotel guest who has just logged in to Welcomate! Enjoy the app and its features.  
+#### Gemini API:
+1. Navigate to [Google AI](https://ai.google.dev/) to create an account.
+2. Go to [API key management](https://aistudio.google.com/app/apikey) and click **"Create API key"**.
+3. Once the API key is generated, copy it.
 
 ---
 
-## Usage Instructions
+## Installation & Setup
 
-**How to use the project**:  
-_TBD_
+### Step 1: Set up environment bariables
+
+First, open your terminal and run the command `cd web-app`
+
+Then, in the `/web-app` directory, create a `.env` file and add the following environment variables:
+
+```bash
+HUGGINGFACE_KEY=YOUR_HUGGINGFACE_API_KEY
+GEMINI_KEY=YOUR_GEMINI_API_KEY
+ACCESS_TOKEN_SECRET="Any string here would do"
+REFRESH_TOKEN_SECRET="Any string here would do"
+```
+
+### Step 2: Install dependencies and deploy
+
+- Intall dependencies using `npm i`
+- Run the development server using `npm run dev` and visit `localhost:3000` in the browser.
+
+### Step 3: Login as a hotel guest
+
+- No hotel guest is currently logged in, so we have provided an admin account for your supposed hotel.  
+- Visit `localhost:3000/adminLogin` and login with username `davinci` and password `thebesthackathon`.  
+- Here you will see a list of customers pre-registered for your hotel. Click on `Create Login` to send them an email with a link to create their account.  
+- Since you cannot access our emails listed, please head over to Chrome Developer Tools by hitting `ctrl+shift+I`  and go to the console and visit the link outputted.  
+- Now you are a hotel guest who has just logged in to Welcomate! Enjoy the app and its features.  
 
 ---
 
