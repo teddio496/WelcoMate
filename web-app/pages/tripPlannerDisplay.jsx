@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import googleMaps from '@/component/googleMaps';
+import MapComponent from '@/component/googleMaps';
 
 const TripPlanner = () => {
     const [plans, setPlans] = useState(null);
     const [currentPlanIndex, setCurrentPlanIndex] = useState(0);
+    const [address, setAddress] = useState('');
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -61,7 +62,7 @@ const TripPlanner = () => {
                             <p className="text-black">Condition: {currentDay.weather.condition}</p>
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.breakfast.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Breakfast</h3>
                                 <p className="mb-1 text-black">{currentDay.breakfast.title}</p>
@@ -71,7 +72,7 @@ const TripPlanner = () => {
                             <img src={currentDay.breakfast.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.morning.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Morning</h3>
                                 <p className="mb-1 text-black">{currentDay.morning.title}</p>
@@ -82,7 +83,7 @@ const TripPlanner = () => {
                             <img src={currentDay.morning.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.lunch.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Lunch</h3>
                                 <p className="mb-1 text-black">{currentDay.lunch.title}</p>
@@ -92,7 +93,7 @@ const TripPlanner = () => {
                             <img src={currentDay.lunch.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.afternoon.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Afternoon</h3>
                                 <p className="mb-1 text-black">{currentDay.afternoon.title}</p>
@@ -103,7 +104,7 @@ const TripPlanner = () => {
                             <img src={currentDay.afternoon.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.dinner.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Dinner</h3>
                                 <p className="mb-1 text-black">{currentDay.dinner.title}</p>
@@ -113,7 +114,7 @@ const TripPlanner = () => {
                             <img src={currentDay.dinner.imageLink} alt="attraction" className="w-32 h-32 object-cover rounded-lg ml-4" />
                         </div>
 
-                        <div className="bg-white p-4 rounded-md shadow-md flex items-center">
+                        <div className="bg-white p-4 rounded-md shadow-md flex items-center" onClick={() => setAddress(currentDay.night.address)}>
                             <div className="flex-1">
                                 <h3 className="text-xl font-semibold mb-2 text-black">Night</h3>
                                 <p className="mb-1 text-black">{currentDay.night.title}</p>
@@ -146,10 +147,10 @@ const TripPlanner = () => {
                 </div>
 
             </div>
-
-            <googleMaps />
             </div>
-            <div className='w-2/6'></div>
+            <div className='w-2/6'>
+                <MapComponent address={address}/>
+            </div>
             <div className="w-1/6 hidden lg:block"></div>
         </div>
     );
