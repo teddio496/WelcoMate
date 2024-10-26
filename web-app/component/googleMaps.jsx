@@ -45,7 +45,7 @@ const googleMaps = () => {
   return (
     <div>
       <LoadScript
-        googleMapsApiKey="" // Replace with your own API key
+        googleMapsApiKey = {process.env.GOOGLE_MAPS_KEY} // Replace with your own API key
         loadingElement={<div>Loading...</div>} // Optional loading element
       >
         {mapCenter && (  // Only render the map when mapCenter is available
