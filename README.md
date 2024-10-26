@@ -66,6 +66,6 @@ REFRESH_TOKEN_SECRET="Any string here would do"
 This project was created and developed by the following team members:
 - Albert Ho: Team-Lead/Vision
 - Patrick Hu: Full-stack Developer
-- Teddy Ho: Full-stack Developer
+- Jaehyeon Heo (Teddy): Full-stack Developer
 - Oscar Pang: ML Engineer/Back-end
 - Eddison Pham: ML Engineer/Back-end
