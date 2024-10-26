@@ -1,6 +1,7 @@
 import React from "react";
 
 const Service = ({ service, onCancel }) => {
+  
   return (
     <>
     <div className="bg-white p-1  shadow-md flex items-center ">
