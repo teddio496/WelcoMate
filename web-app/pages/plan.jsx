@@ -54,7 +54,7 @@ const TripPlanner = () => {
                 <p className="mb-1 text-black">{mealData.address}</p>
                 <p className="mb-2 text-black">{mealData.description}</p>
                 {mealData.link_url && (
-                    <a href={mealData.link_url} className="text-blue-500 hover:underline">More Info</a>
+                    <a href={mealData.link_url} target="_blank" className="text-blue-500 hover:underline">More Info</a>
                 )}
             </div>
             <img src={mealData.imageLink} alt={meal} className="w-32 h-32 object-cover rounded-lg ml-4" />
