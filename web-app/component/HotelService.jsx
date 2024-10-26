@@ -29,7 +29,7 @@ const HotelService = () => {
         setGuestInfo(guestInfo);
 
         const servicePromises = guestInfo.serviceBookings.map((serviceBooking) => {
-          const id = serviceBooking.id;
+          const id = serviceBooking.serviceId;
           return fetch(`/api/auth/protected/get-service/?id=${id}`, {
             method: "GET",
             headers: {
@@ -64,8 +64,8 @@ const HotelService = () => {
       .find((row) => row.startsWith("accessToken="))
       .split("=")[1];
     try {
-      const cancelResponse = await fetch(`/api/auth/protected/cancel-service`, {
-        method: "POST",
+      const cancelResponse = await fetch(`/api/auth/protected/cancel-booking`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -101,10 +101,10 @@ const HotelService = () => {
             />
           ))
         ) : (
-          <p>No services booked.</p>
+          <p className="p-4">No services booked.</p>
         )
       ) : (
-        <p>No guest information available.</p>
+        <p className="p-4">No guest information available.</p>
       )}
     </div>
   );

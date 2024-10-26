@@ -24,16 +24,22 @@ export const ActivitiesPanel = () => {
         const { guestInfo } = await guestResponse.json();
         // console.log("FROM ACITIVITIES PANEL: " + guestInfo);
         setGuestInfo(guestInfo);
+        console.log("GUEST INFO: ", guestInfo);
 
         const planIdResponse = await fetch(`/api/plan?id=${guestInfo.id}`);
         if (!planIdResponse.ok) {
           throw new Error(`Error fetching plan info: ${planIdResponse.status}`);
         }
+      
         const { planId } = await planIdResponse.json();
+        if (!planId) {
+          return null
+        }
         const planResponse = await fetch(`/api/generateTrip?planId=${planId}`);
         const plan = await planResponse.json();
         console.log("PLAN DETAILS: " + plan);
         setPlan(plan);
+        console.log("PLAN: ", plan);
       }
       catch (e) {
         console.log(e);
@@ -48,7 +54,7 @@ export const ActivitiesPanel = () => {
           activity={plan["day_1"]} // only display day 1
         />
       ) : (
-        <p>No guest information available.</p>
+        <p className="p-4">No plan yet.</p>
       )}
     </div>
 

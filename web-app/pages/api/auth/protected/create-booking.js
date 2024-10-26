@@ -1,30 +1,39 @@
-import verifyToken from "../middleware/verify-token";
+import verifyToken from "../../middleware/verify-token";
 import { prisma } from '@/utils/prismaClient';
 
-function createBooking(req, res) {
+async function createBooking(req, res) {
   if (req.method === "POST") {
     const { roomNumber, checkinDate } = req.user; // req.user is the payload
-    const { serviceName, hotelId } = req.body;
+    const { serviceId, hotelId } = req.body;
+    console.log(serviceId, hotelId);
     try {
-      const guest = prisma.hotelGuest.findUnique({
+      const guest = await prisma.hotelGuest.findMany({
         where: {
-          room_number: roomNumber,
-          checkin_date: checkinDate,
+          roomNumber: roomNumber,
+          checkinDate: checkinDate,
         }
       });
-      const newBooking = prisma.hotelServiceBookings.create({
+
+      if (!guest) {
+        return res.status(404).json({ error: "Guest not found" });
+      }
+
+      const newBooking = await prisma.hotelServiceBooking.create({
         data: {
-          service_name: serviceName,
-          guest_id: guest.id,
-          hotel_id: hotelId,
+          serviceId,
+          guestId: guest[0].id,
+          hotelId,
         }
       });
-      res.status(201).json({ newBooking: newBooking });
+      
+      res.status(201).json({ newBooking });
     }
     catch (e) {
-      console.log(e);
-      res.status(500).json({ error: "create new booking failed" });
+      console.error(e);
+      res.status(500).json({ error: "Failed to create new booking" });
     }
+  } else {
+    res.status(405).json({ error: "Method not allowed" });
   }
 };
 

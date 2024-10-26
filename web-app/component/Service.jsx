@@ -9,7 +9,7 @@ const Service = ({ service, onCancel }) => {
         <p className="text-sm text-gray-600">{service.descriptions || "No description available."}</p>
         {/*<p className="mb-2 text-black">{service.freeService ? "This is a free service." : "This service has a fee."}</p>*/}
         <button
-          className="bg-red-500 px-4 py-2 rounded-md "
+          className="bg-[#E2DCC8] px-4 py-2 rounded-md "
           onClick={onCancel}>
           Cancel
         </button>
