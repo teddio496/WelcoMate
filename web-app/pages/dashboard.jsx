@@ -97,18 +97,20 @@ export const Dashboard = () => {
           </div>
         </div>
 
-
         {accessToken ? (
           <div className="flex">
-
-            <div className="w-1/2 p-20 ">
-              <h1 className="p-1 text-2xl">Booked Services</h1>
-              <HotelService accessToken={accessToken} />
+            <div className="w-1/2 p-16">
+              <h1 className="p-1 text-2xl mb-2">Booked Services</h1>
+              <HotelService />
             </div>
-            <div className="w-1/2">
-              <div className="border-white p-10 h-[700px] overflow-y-auto">
-                <ActivitiesPanel accessToken={accessToken} />
-              </div>
+            <div className="w-1/2 p-16">
+              <h1 className="p-1 text-2xl mb-2">
+                Trip Itinerary
+                <span className="ml-2 px-2 py-1 rounded-lg bg-gray-200">
+                  Day 1
+                </span>
+              </h1>
+              <ActivitiesPanel />
             </div>
           </div>
         ) : (
@@ -120,6 +122,6 @@ export const Dashboard = () => {
       </div>
 
       <div className="w-1/6 hidden lg:block"></div>
-    </div>
+    </div >
   );
 };

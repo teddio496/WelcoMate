@@ -10,13 +10,13 @@ const TripPlanner = () => {
             try {
                 const planIdResponse = await fetch('/api/plan?id=1');
                 const planId = await planIdResponse.json();
-                console.log(planId);
+                // console.log(planId);
 
                 const plan = planId.planId;
-                console.log(plan);
+                // console.log(plan);
                 const planResponse = await fetch(`/api/generateTrip?planId=${plan}`);
                 const t = await planResponse.json();
-                // console.log(t);
+                console.log(t);
                 setPlans(t);
             }
             catch (error) {
