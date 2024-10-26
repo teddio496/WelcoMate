@@ -25,6 +25,7 @@ export default async function generateResponse(attractions_data, restaurants_dat
                 "high": "...",
                 "low": "...",
                 "condition": "..."
+                "imageLink": "...",
             },
             "breakfast": {
                 "title": "...",

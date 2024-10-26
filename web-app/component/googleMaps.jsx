@@ -24,8 +24,13 @@ const MapComponent = ({ address }) => {
       if (results && results.length > 0) {
         const { x: lon, y: lat } = results[0]; // Get the longitude (x) and latitude (y)
         setPosition([lat, lon]); // Set the map position to the geocoded coordinates
-      } else {
+      } 
+      else {
         console.log('No results found');
+        const randomOffset = () => (Math.random() - 0.5) * 0.5;
+        const randomLat = 43.6532 + randomOffset();
+        const randomLon = -79.3832 + randomOffset();
+        setPosition([randomLat, randomLon]);
       }
     };
 

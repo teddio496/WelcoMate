@@ -1,4 +1,5 @@
 import weather from 'weather-js';
+import weatherToImage from './weatherToImage';
 
 export default async function fetchWeatherData(startDate, endDate, city) {
     const weatherData = [];
@@ -19,12 +20,16 @@ export default async function fetchWeatherData(startDate, endDate, city) {
                 const dayForecast = forecastData.find(forecast => forecast.date === dateStr);
 
                 if (dayForecast) {
+                    console.log(dayForecast.skycodeday.toString());
+                    const categoryImage = weatherToImage[dayForecast.skycodeday.toString()];
+
                     weatherData.push({
                         date: dateStr,
                         low: dayForecast.low,
                         high: dayForecast.high,
                         condition: dayForecast.skytextday,
-                        precipitation: dayForecast.precip,
+                        imageLink: categoryImage,
+                        precipitation: dayForecast.precip + '%',
                     });
                 }
 
