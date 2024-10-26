@@ -43,7 +43,7 @@ const MapComponent = ({ address }) => {
   }, [address]); 
 
   return (
-    <MapContainer center={position} zoom={10} style={{ height: '92vh', width: '60vh', position: 'fixed' }}>
+    <MapContainer center={position} zoom={10} style={{ height: '100vh', width: '60vh', position: 'fixed' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
