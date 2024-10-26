@@ -28,7 +28,7 @@ _TBD_
 ## Credits
 
 This project was created and developed by the following team members:
-- Albert Lam: Team-Lead/Vision
+- Albert Ho: Team-Lead/Vision
 - Patrick Hu: Full-stack Developer
 - Teddy Ho: Full-stack Developer
 - Oscar Pang: ML Engineer/Back-end
