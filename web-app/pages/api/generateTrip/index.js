@@ -36,17 +36,30 @@ export default async function handler(req, res) {
             recommend(user_input, 'restaurants')
         ]);
         
-        const response = await generateLLMResponse(attractions_data, restaurants_data, weather_data, user_input, 'Toronto');
-        console.log(response);    
-        
-        const firstBrace = response.indexOf('{');
-        const lastBrace = response.lastIndexOf('}');
+        let response = "";
         let parsedResponse = {};
+        
+        let success = false;
+        let retries = 0;
 
-        if (firstBrace !== -1 && lastBrace !== -1) {
-            const jsonString = response.substring(firstBrace, lastBrace + 1);
-            parsedResponse = JSON.parse(jsonString);
+        // Retry up to 5 times if parsing fails
+        while (!success && retries < 5) {
+            try {
+                response = await generateLLMResponse(attractions_data, restaurants_data, weather_data, user_input, 'Toronto');
+                const firstBrace = response.indexOf('{');
+                const lastBrace = response.lastIndexOf('}');
+                if (firstBrace !== -1 && lastBrace !== -1) {
+                    const jsonString = response.substring(firstBrace, lastBrace + 1);
+                    parsedResponse = JSON.parse(jsonString);
+                    success = true;
+                }
+            }
+            catch (error) {
+                console.log('Failed to parse response. Retrying...');
+            }   
         }
+
+        console.log(parsedResponse);
 
         try {
             await prisma.plan.create({
