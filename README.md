@@ -33,8 +33,11 @@ REFRESH_TOKEN_SECRET="Any string here would do"
 ```
 
 Then install dependencies using `npm i`, then run the development server using `npm run dev` and visit `localhost:3000` in the browser.  
-No hotel guest is currently logged in, so we have provided an admin account.  
+No hotel guest is currently logged in, so we have provided an admin account for your supposed hotel.  
 Visit `localhost:3000/adminLogin` and login with username `davinci` and password `thebesthackathon`.  
+Here you will see a list of customers pre-registered for your hotel. Click on `Create Login` to send them an email with a link to create their account.  
+Since you cannot our emails listed, please head over to Chrome Developer Tools by hitting `ctrl+shift+I`  and go to the console and visit the link outputted.  
+Now you are a hotel guest who has just logged in to Welcomate! Enjoy the app and its features.  
 
 ---
 
