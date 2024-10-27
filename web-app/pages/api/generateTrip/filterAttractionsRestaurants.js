@@ -97,7 +97,7 @@ const recommend = async (userInput, attractions_or_restaurants) => {
             console.log(topResults.length);
         }
         else if (attractions_or_restaurants === 'restaurants') {
-            const text = `${who_is_travelling} ${interests} ${preferences} ${food_preferences}`;
+            const text = `${food_preferences}`;
             topTags = await getTopTags(text, restaurantsTags);
             topResults = await getRestaurants(topTags);
             console.log(topResults.length);
