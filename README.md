@@ -2,6 +2,8 @@
  
 ### 🏆 B2B Category Winner of the 2024 DaVinci Competition hosted by UofT W3B
 
+[Demo Video](https://drive.google.com/file/d/10czplfjb8myLsAHQS40tc-lrZwku_y8f/view)
+
 ---
 
 ## 🎯 Project Description
